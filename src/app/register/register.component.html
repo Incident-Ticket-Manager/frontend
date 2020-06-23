@@ -1,4 +1,4 @@
-<mat-card class="mx-auto col-md-4">
+<mat-card class="mx-auto col-md-5">
   <mat-card-header>
     <mat-card-title>Register</mat-card-title>
   </mat-card-header>
@@ -13,12 +13,12 @@
             Username is required
           </mat-error>
           <mat-error *ngIf="username.invalid && (username.dirty || username.touched) && username.errors.minlength">
-            Username is required
+            Username must contain at leat 4 characters
           </mat-error>
 
 
         </mat-form-field>
-
+        <br><br>
 
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
@@ -32,7 +32,7 @@
           </mat-error>
 
         </mat-form-field>
-
+        <br><br>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
           <input type="password" matInput placeholder="Password..." formControlName="password">
@@ -40,16 +40,29 @@
           <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
             Password is required
           </mat-error>
+          <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+            Password must contain at least one lower case letter<br>
+            Password must contain at least one upper case letter<br>
+            Password contain a least 8 characters<br>
+            Password contain a least one special character<br>
+          </mat-error>
         </mat-form-field>
-
+        <br><br>
+        <br><br>
         <mat-form-field appearance="outline">
           <mat-label>Confirm Password</mat-label>
           <input type="password" matInput placeholder="Password confirmation..." formControlName="passwordConfirmation">
-          <mat-error *ngIf="passwordConfirmation.invalid && (passwordConfirmation.dirty || passwordConfirmation.touched) && passwordConfirmation.errors.required">
+          <mat-error
+            *ngIf="passwordConfirmation.invalid && (passwordConfirmation.dirty || passwordConfirmation.touched) && passwordConfirmation.errors.required">
             Password confirmation is required
           </mat-error>
-        </mat-form-field>
+          <mat-error *ngIf="passwordConfirmation.invalid && (passwordConfirmation.dirty || passwordConfirmation.touched) && passwordConfirmation.errors &&
+   passwordConfirmation.errors.ConfirmPassword ">
+            Passwords don't match
+          </mat-error>
 
+        </mat-form-field>
+        <br><br>
         <button type="submit" mat-raised-button color="primary">Register</button>
       </form>
     </div>
