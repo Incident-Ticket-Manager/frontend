@@ -23,6 +23,8 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { StatusPipe } from './pipes/status.pipe';
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { StatusPipe } from './pipes/status.pipe';
     HomeComponent,
     ProjectTableComponent,
     ProjectDetailComponent,
-    StatusPipe
+    StatusPipe,
+    TicketDetailComponent
   ],
   imports: [
     HttpClientModule,
@@ -49,7 +52,7 @@ import { StatusPipe } from './pipes/status.pipe';
     MatTableModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatPaginatorModule
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -3,6 +3,8 @@ import {ProjectService} from '../services/project.service';
 import {Project} from '../../model/Project';
 import {first} from 'rxjs/operators';
 import {TicketStats} from '../../model/ticket-stats';
+import {MatDialog} from '@angular/material/dialog';
+import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -13,7 +15,8 @@ export class ProjectDetailComponent implements OnInit {
   private project: Project;
 
   constructor(
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private dialog: MatDialog
   ) { }
 
   readonly DISPLAYED_COLUMNS = ['id', 'date', 'title', 'client', 'state'];
@@ -22,6 +25,15 @@ export class ProjectDetailComponent implements OnInit {
     this.projectService.getProjectDetail('Super projet').pipe(first()).subscribe(res => {
       this.project = res;
       this.project.ticketStats = new TicketStats(this.project.ticketStats);
+    });
+  }
+
+  openTicketDetail(ticket) {
+    this.dialog.open(TicketDetailComponent, {
+      width: '500px',
+      data: {
+        injectedTicket: ticket
+      }
     });
   }
 

@@ -35,7 +35,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="DISPLAYED_COLUMNS"></tr>
-      <tr mat-row *matRowDef="let ticket; columns: DISPLAYED_COLUMNS;"></tr>
+      <tr mat-row *matRowDef="let ticket; columns: DISPLAYED_COLUMNS;" (click)="openTicketDetail(ticket)"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </section>
