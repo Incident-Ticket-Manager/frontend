@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         await this.router.navigate([""]);
         this.snackBar.open("Success : Logged in");
       } catch (e) {
-        this.snackBar.open(`Failure : ${e.message}`);
+        this.snackBar.open(`Invalid credentials`);
       }
 
     }
