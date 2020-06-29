@@ -1,49 +1,49 @@
 <div class="project-detail-content">
-  <h1>Projet Fusion</h1>
+  <h1>Projet {{ project.name }}</h1>
   <section>
     <h2>A Propos</h2>
     <div>Date de création: </div>
-    <div>Développeurs: </div>
+    <div>Administrateur: {{ project.admin }}</div>
   </section>
 
   <section>
     <h2>Incidents en cours</h2>
-    <table mat-table>
+    <table mat-table [dataSource]="project.tickets">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef class="table-column">Numéro</th>
-        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        <td mat-cell *matCellDef="let ticket">{{ ticket.id }}</td>
       </ng-container>
 
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef class="table-column">Date</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let ticket">{{ ticket.date }}</td>
       </ng-container>
 
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef class="table-column">Intitulé</th>
-        <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+        <td mat-cell *matCellDef="let ticket">{{ ticket.title }}</td>
       </ng-container>
 
       <ng-container matColumnDef="client">
         <th mat-header-cell *matHeaderCellDef class="table-column">Client</th>
-        <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+        <td mat-cell *matCellDef="let ticket">{{ ticket.client.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="state">
         <th mat-header-cell *matHeaderCellDef class="table-column">Avancement</th>
-        <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+        <td mat-cell *matCellDef="let ticket">{{ ticket.status | status }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="DISPLAYED_COLUMNS"></tr>
-      <tr mat-row *matRowDef="let row; columns: DISPLAYED_COLUMNS;"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <tr mat-row *matRowDef="let ticket; columns: DISPLAYED_COLUMNS;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </section>
 
   <section>
     <h2>Statistiques</h2>
     <div>Nombre total d'incidents: </div>
-    <div>Nombre d'incidents en cours: </div>
+    <div>Nombre d'incidents ouverts: {{ project.ticketStats.open }}</div>
     <div>Nombre d'incidents bloqués: </div>
     <div>Nombre d'incidents résolus: </div>
   </section>

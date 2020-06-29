@@ -28,4 +28,9 @@ export class ProjectService {
   async deleteProject(project: Project) {
     return this.http.delete(`${this.api}/projects/${project.name}`).toPromise();
   }
+
+  getProjectDetail(name: string) {
+    name.replace(/\s/g, '%20');
+    return this.http.get<Project>(`${this.api}/projects/${name}`);
+  }
 }

@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { StatusPipe } from './pipes/status.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     LoginComponent,
     HomeComponent,
     ProjectTableComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    StatusPipe
   ],
   imports: [
     HttpClientModule,
