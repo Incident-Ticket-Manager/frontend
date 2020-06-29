@@ -1,0 +1,28 @@
+<mat-form-field>
+    <mat-card class="mx-auto col-md-4">
+        <mat-card-header>
+            <mat-card-title>New project</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="d-flex flex-column">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="outline">
+                <mat-label>Project name ... </mat-label>
+                <input matInput placeholder="Project name..." formControlName="projectname">
+
+                <mat-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched) && projectname.errors.required">
+                    Project name is required
+                </mat-error>
+                <mat-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched) && projectname.errors.minlength">
+                    Project name is required
+                </mat-error>
+                
+                </mat-form-field>
+
+                <button type="submit" mat-raised-button color="primary">Create</button>
+            </form>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</mat-form-field>
+  
