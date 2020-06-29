@@ -12,14 +12,16 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {HomeComponent} from './home/home.component';
 import {ProjectTableComponent} from './project-table/project-table.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {TokenInterceptor} from "./security/token.interceptor";
 import {MatIconModule} from "@angular/material/icon";
+import { HomeComponent } from './home/home.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import {MatIconModule} from "@angular/material/icon";
     LoginComponent,
     HomeComponent,
     ProjectTableComponent,
+    ProjectDetailComponent
   ],
   imports: [
     HttpClientModule,
@@ -43,7 +46,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatSnackBarModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

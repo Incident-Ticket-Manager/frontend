@@ -8,7 +8,7 @@ import {ProjectService} from "../services/project.service";
   styleUrls: ['./project-table.component.css']
 })
 export class ProjectTableComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'admin', 'date','actions'];
+  displayedColumns: string[] = ['name', 'admin', 'date', 'actions'];
 
   public projects: Project[];
 

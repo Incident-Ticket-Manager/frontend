@@ -1,0 +1,37 @@
+.project-detail-content {
+  color: #EEEEEE;
+  padding: 15px 10px;
+}
+
+h1 {
+  text-align: left;
+  font-weight: bold;
+}
+
+section + section {
+  margin-top: 15px;
+}
+
+.float__button {
+  border-color: #00bfa5;
+}
+
+.buttons-block {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  right: 60px;
+  bottom: 70px;
+  min-height: 80px;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+mat-paginator, table {
+  width: 100%;
+  background-color: #393e46;
+}
+
+.table-column {
+  width: 20%;
+}
