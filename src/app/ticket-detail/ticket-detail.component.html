@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Rapport Incident</h1>
+<div mat-dialog-content>
+  <p>Identifiant: {{ data.id }}</p>
+  <p>Créé le: {{ data.date | date: 'dd-MM-yyyy' }}</p>
+  <p>Etat: {{ data.status | status }}</p>
+  <p>Intitulé: {{ data.title }}</p>
+  <p>Détail: {{ data.content }}</p>
+  <p>Rapporteur: {{ data.client.name }}</p>
+</div>
+<div mat-dialog-actions class="modal-bottom">
+  <button mat-stroked-button color="primary" (click)="onCancelClick()">Fermer</button>
+  <button mat-raised-button cdkFocusInitial color="primary" (click)="onUpdateClick()">Modifier</button>
+</div>

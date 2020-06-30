@@ -12,9 +12,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {HomeComponent} from './home/home.component';
 import {ProjectTableComponent} from './project-table/project-table.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
@@ -22,6 +20,13 @@ import {TokenInterceptor} from "./security/token.interceptor";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDialogModule} from "@angular/material/dialog";
 import {NewProjectComponent} from "./new-project/new-project.component";
+import { HomeComponent } from './home/home.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { StatusPipe } from './pipes/status.pipe';
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,11 @@ import {NewProjectComponent} from "./new-project/new-project.component";
     LoginComponent,
     HomeComponent,
     ProjectTableComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    ProjectDetailComponent,
+    StatusPipe,
+    TicketDetailComponent,
+    ConfirmModalComponent
   ],
   imports: [
     HttpClientModule,
@@ -47,7 +56,8 @@ import {NewProjectComponent} from "./new-project/new-project.component";
     MatTableModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
