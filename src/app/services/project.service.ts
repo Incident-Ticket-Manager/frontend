@@ -22,7 +22,7 @@ export class ProjectService {
   }
 
   async updateProjectName(project: Project, newName: string) {
-    return this.http.post<Project>(`${this.api}/projects`, {name: project.name, newName}).toPromise();
+    return this.http.put<Project>(`${this.api}/projects`, {name: project.name, newName}).toPromise();
   }
 
   async deleteProject(project: Project) {
