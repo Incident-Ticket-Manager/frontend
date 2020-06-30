@@ -25,6 +25,10 @@ export class ProjectTableComponent implements OnInit {
   }
 
   async ngOnInit() {
+    await this.refreshProjects();
+  }
+
+  private async refreshProjects() {
     this.projects = await this.service.getProjects();
   }
 
@@ -40,6 +44,17 @@ export class ProjectTableComponent implements OnInit {
         this.projects = [...this.projects, result];
         this.snackBar.open("Success : project created");
       }
+    } catch (e) {
+      this.snackBar.open(e.message);
+      console.error(e.message);
+    }
+  }
+
+  async handleClickDeleteProject(project: Project) {
+    try {
+      await this.service.deleteProject(project);
+      this.snackBar.open("Success : project deleted");
+      await this.refreshProjects();
     } catch (e) {
       this.snackBar.open(e.message);
       console.error(e.message);
