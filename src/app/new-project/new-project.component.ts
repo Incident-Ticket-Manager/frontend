@@ -1,6 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Component, OnInit} from '@angular/core';
+import {MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Project} from "../model/Project";
 
 export interface DialogData {
   projectname: string;
@@ -17,24 +18,15 @@ export class NewProjectComponent implements OnInit {
     projectname: new FormControl('', [Validators.required, Validators.minLength(4)]),
   });
 
-  constructor(public dialog: MatDialog) {}
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {projectname: this.projectname}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  constructor(public dialogRef: MatDialogRef<NewProjectComponent>) {
   }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    console.log(this.registerForm.value);
+    const username = JSON.parse(sessionStorage.getItem("profile")).username;
+    this.dialogRef.close(new Project(this.projectname.value, username, new Date().toISOString()));
   }
 
   get projectname() {
@@ -42,20 +34,3 @@ export class NewProjectComponent implements OnInit {
   }
 
 }
-
-@Component({
-  selector: 'app-new-project',
-  templateUrl: './new-project.component.html',
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
-

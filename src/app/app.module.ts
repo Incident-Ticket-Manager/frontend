@@ -20,6 +20,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {TokenInterceptor} from "./security/token.interceptor";
 import {MatIconModule} from "@angular/material/icon";
+import {MatDialogModule} from "@angular/material/dialog";
+import {NewProjectComponent} from "./new-project/new-project.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import {MatIconModule} from "@angular/material/icon";
     LoginComponent,
     HomeComponent,
     ProjectTableComponent,
+    NewProjectComponent
   ],
   imports: [
     HttpClientModule,
@@ -43,7 +46,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatSnackBarModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
