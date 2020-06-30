@@ -16,7 +16,8 @@ export class DeleteProjectComponent implements OnInit {
   }
 
   public accept() {
-    // this.dialogRef.close(new Project(this.projectname.value, username, new Date().toISOString()));
+    const username = JSON.parse(sessionStorage.getItem("profile")).username;
+    this.dialogRef.close(new Project(null, username, new Date().toISOString()));
   }
 
   public decline() {
