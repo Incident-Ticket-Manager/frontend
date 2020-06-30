@@ -2,7 +2,7 @@
   <h1>Projet {{ project.name }}</h1>
   <section>
     <h2>A Propos</h2>
-    <div>Date de création: </div>
+    <div>Date de création: {{ project.date | date: 'dd-MM-yyyy' }}</div>
     <div>Administrateur: {{ project.admin }}</div>
   </section>
 
@@ -42,14 +42,14 @@
 
   <section>
     <h2>Statistiques</h2>
-    <div>Nombre total d'incidents: </div>
+    <div>Nombre total d'incidents: {{ project.ticketStats.total }}</div>
     <div>Nombre d'incidents ouverts: {{ project.ticketStats.open }}</div>
-    <div>Nombre d'incidents bloqués: </div>
-    <div>Nombre d'incidents résolus: </div>
+    <div>Nombre d'incidents en cours: {{ project.ticketStats.inProgress }}</div>
+    <div>Nombre d'incidents résolus: {{ project.ticketStats.resolved }}</div>
   </section>
 
   <div class="buttons-block">
     <button mat-raised-button color="primary" class="float__button">Créer un incident</button>
-    <button mat-stroked-button color="primary" class="float__button">Supprimer le projet</button>
+    <button mat-stroked-button color="primary" class="float__button" *ngIf="project.isAdmin" (click)="onDeleteClick()">Supprimer le projet</button>
   </div>
 </div>

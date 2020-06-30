@@ -33,4 +33,9 @@ export class ProjectService {
     name.replace(/\s/g, '%20');
     return this.http.get<Project>(`${this.api}/projects/${name}`);
   }
+
+  deleteProject(name: string) {
+    name.replace(/\s/g, '%20');
+    return this.httpClient.delete<Project>(`${this.api}/projects/${name}`, { headers: this.headers});
+  }
 }

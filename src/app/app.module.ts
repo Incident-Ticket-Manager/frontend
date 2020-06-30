@@ -25,6 +25,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { StatusPipe } from './pipes/status.pipe';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     ProjectTableComponent,
     ProjectDetailComponent,
     StatusPipe,
-    TicketDetailComponent
+    TicketDetailComponent,
+    ConfirmModalComponent
   ],
   imports: [
     HttpClientModule,

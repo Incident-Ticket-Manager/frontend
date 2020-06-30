@@ -5,6 +5,7 @@ import {first} from 'rxjs/operators';
 import {TicketStats} from '../../model/ticket-stats';
 import {MatDialog} from '@angular/material/dialog';
 import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
+import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -12,7 +13,7 @@ import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
   styleUrls: ['./project-detail.component.css']
 })
 export class ProjectDetailComponent implements OnInit {
-  private project: Project;
+  project: Project;
 
   constructor(
     private projectService: ProjectService,
@@ -22,7 +23,7 @@ export class ProjectDetailComponent implements OnInit {
   readonly DISPLAYED_COLUMNS = ['id', 'date', 'title', 'client', 'state'];
 
   ngOnInit(): void {
-    this.projectService.getProjectDetail('Super projet').pipe(first()).subscribe(res => {
+    this.projectService.getProjectDetail('test').pipe(first()).subscribe(res => {
       this.project = res;
       this.project.ticketStats = new TicketStats(this.project.ticketStats);
     });
@@ -31,9 +32,14 @@ export class ProjectDetailComponent implements OnInit {
   openTicketDetail(ticket) {
     this.dialog.open(TicketDetailComponent, {
       width: '500px',
-      data: {
-        injectedTicket: ticket
-      }
+      data: ticket
+    });
+  }
+
+  onDeleteClick() {
+    this.dialog.open(ConfirmModalComponent, {
+      width: '500px',
+      data: this.project
     });
   }
 
