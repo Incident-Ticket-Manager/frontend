@@ -19,6 +19,7 @@ import {ProjectTableComponent} from './project-table/project-table.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {TokenInterceptor} from "./security/token.interceptor";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {TokenInterceptor} from "./security/token.interceptor";
     ReactiveFormsModule,
     MatSnackBarModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
