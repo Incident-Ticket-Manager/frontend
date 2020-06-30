@@ -26,7 +26,7 @@ export class NewProjectComponent implements OnInit {
 
   onSubmit() {
     const username = JSON.parse(sessionStorage.getItem("profile")).username;
-    this.dialogRef.close(new Project(this.projectname.value, username, new Date().toISOString()));
+    this.dialogRef.close(new Project({name: this.projectname.value, admin: username, date: new Date().toISOString()}));
   }
 
   get projectname() {
