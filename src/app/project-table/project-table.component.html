@@ -25,10 +25,10 @@
       <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <ng-container *ngIf="this.profile.username == element.admin">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="handleClickModifProject(element)">
           <mat-icon>create</mat-icon>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="handleClickDeleteProject(element)">
           <mat-icon>delete</mat-icon>
         </button>
         </ng-container>

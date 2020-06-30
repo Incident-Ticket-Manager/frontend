@@ -22,6 +22,8 @@ import {TokenInterceptor} from "./security/token.interceptor";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDialogModule} from "@angular/material/dialog";
 import {NewProjectComponent} from "./new-project/new-project.component";
+import { ModifProjectComponent } from './modif-project/modif-project.component';
+import { DeleteProjectComponent } from './delete-project/delete-project.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {NewProjectComponent} from "./new-project/new-project.component";
     LoginComponent,
     HomeComponent,
     ProjectTableComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    ModifProjectComponent,
+    DeleteProjectComponent
   ],
   imports: [
     HttpClientModule,
