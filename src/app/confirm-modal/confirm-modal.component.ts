@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Project} from '../../model/Project';
+import {Project} from '../model/Project';
 import {ProjectService} from '../services/project.service';
 import {first} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -29,15 +29,13 @@ export class ConfirmModalComponent implements OnInit {
   }
 
   onDeleteClick() {
-    this.projectService.deleteProject(this.data.name).pipe(first())
-      .subscribe(
-        () => this.showSuccessSnackBar(),
-        () => this.showErrorSnackBar(),
-        () => {
-          this.dialogRef.close();
-          this.router.navigateByUrl('');
-        }
-      );
+    this.projectService.deleteProject(this.data)
+      .then(() => this.showSuccessSnackBar())
+      .catch(() => this.showErrorSnackBar())
+      .finally(() => {
+        this.dialogRef.close();
+        this.router.navigateByUrl('');
+      });
   }
 
   showSuccessSnackBar() {

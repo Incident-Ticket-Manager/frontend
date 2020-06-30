@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectService} from '../services/project.service';
-import {Project} from '../../model/Project';
+import {Project} from '../model/Project';
 import {first} from 'rxjs/operators';
-import {TicketStats} from '../../model/ticket-stats';
+import {TicketStats} from '../model/ticket-stats';
 import {MatDialog} from '@angular/material/dialog';
 import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
 import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
@@ -23,6 +23,7 @@ export class ProjectDetailComponent implements OnInit {
   readonly DISPLAYED_COLUMNS = ['id', 'date', 'title', 'client', 'state'];
 
   ngOnInit(): void {
+    // @TODO replace 'test' by the project name
     this.projectService.getProjectDetail('test').pipe(first()).subscribe(res => {
       this.project = res;
       this.project.ticketStats = new TicketStats(this.project.ticketStats);

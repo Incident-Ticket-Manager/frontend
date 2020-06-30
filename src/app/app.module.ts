@@ -54,7 +54,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     MatTableModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

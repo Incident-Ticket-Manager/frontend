@@ -26,16 +26,12 @@ export class ProjectService {
   }
 
   async deleteProject(project: Project) {
-    return this.http.delete(`${this.api}/projects/${project.name}`).toPromise();
+    const name = project.name.replace(/\s/g, '%20');
+    return this.http.delete(`${this.api}/projects/${name}`).toPromise();
   }
 
   getProjectDetail(name: string) {
     name.replace(/\s/g, '%20');
     return this.http.get<Project>(`${this.api}/projects/${name}`);
-  }
-
-  deleteProject(name: string) {
-    name.replace(/\s/g, '%20');
-    return this.httpClient.delete<Project>(`${this.api}/projects/${name}`, { headers: this.headers});
   }
 }
