@@ -5,6 +5,10 @@ import {MatDialog} from "@angular/material/dialog";
 import {NewProjectComponent} from "../new-project/new-project.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Profile} from "../model/Profile";
+import {ModifProjectComponent} from "../modif-project/modif-project.component";
+import {DeleteProjectComponent} from "../delete-project/delete-project.component";
+
+
 
 @Component({
   selector: 'app-project-table',
@@ -50,11 +54,38 @@ export class ProjectTableComponent implements OnInit {
     }
   }
 
-  async handleClickDeleteProject(project: Project) {
+
+  async handleClickModifProject(project: Project) {
+    const dialogRef = this.dialog.open(ModifProjectComponent, {
+      width: "300px",
+    });
+
+    let result = await dialogRef.afterClosed().toPromise();
+    console.log(result)
     try {
-      await this.service.deleteProject(project);
-      this.snackBar.open("Success : project deleted");
-      await this.refreshProjects();
+      if (result) {
+        result = await this.service.updateProjectName(project, result.name);
+        this.projects = await this.service.getProjects();
+        this.snackBar.open("Success : project modified");
+      }
+    } catch (e) {
+      this.snackBar.open(e.message);
+      console.error(e.message);
+    }
+  }
+
+  async handleClickDeleteProject(project: Project) {
+    const dialogRef = this.dialog.open(DeleteProjectComponent, {
+      width: "300px",
+    });
+
+    let result = await dialogRef.afterClosed().toPromise();
+    try {
+      if (result) {
+        result = await this.service.deleteProject(project);
+        this.projects = await this.service.getProjects();
+        this.snackBar.open("Success : project deleted");
+      }
     } catch (e) {
       this.snackBar.open(e.message);
       console.error(e.message);
