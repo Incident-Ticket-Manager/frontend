@@ -29,6 +29,10 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { ModifProjectComponent } from './modif-project/modif-project.component';
 import { DeleteProjectComponent } from './delete-project/delete-project.component';
+import { ModifUserComponent } from './modif-user/modif-user.component';
+import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { NewUserComponent } from './new-user/new-user.component';
+import { UserTableComponent } from './user-table/user-table.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,11 @@ import { DeleteProjectComponent } from './delete-project/delete-project.componen
     TicketDetailComponent,
     ConfirmModalComponent,
     ModifProjectComponent,
-    DeleteProjectComponent
+    DeleteProjectComponent,
+    ModifUserComponent,
+    DeleteUserComponent,
+    NewUserComponent,
+    UserTableComponent
   ],
   imports: [
     HttpClientModule,

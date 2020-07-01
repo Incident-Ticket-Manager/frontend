@@ -14,16 +14,16 @@ export class UsersService {
   ) {
   }
 
-  async getUserd() {
+  async getUsers() {
     return this.http.get<User[]>(`${this.api}/users`).toPromise();
   }
 
-  async createUser(project: User) {
-    return this.http.post<User>(`${this.api}/users`, project).toPromise();
+  async createUser(user: User) {
+    return this.http.post<User>(`${this.api}/users`, user).toPromise();
   }
 
-  async updateUser(project: User, newName: string) {
-    return this.http.put<User>(`${this.api}/users`, {name: project.name, newName}).toPromise();
+  async updateUser(user: User, newName: string, newAddress: string, newPhone: string, newEmail: string) {
+    return this.http.put<User>(`${this.api}/users`, {name: user.name, newName, newAddress, newPhone, newEmail}).toPromise();
   }
 
   async deleteUser(project: User) {
