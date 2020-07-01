@@ -16,11 +16,10 @@ export class DeleteProjectComponent implements OnInit {
   }
 
   public accept() {
-    const username = JSON.parse(sessionStorage.getItem("profile")).username;
-    this.dialogRef.close(new Project(null, username, new Date().toISOString()));
+    this.dialogRef.close(true);
   }
 
   public decline() {
-    this.dialogRef.close()
+    this.dialogRef.close(false);
   }
 }
