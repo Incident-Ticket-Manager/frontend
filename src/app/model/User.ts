@@ -1,13 +1,13 @@
 export class User {
   name: string;
-  phone: string;
-  address: string;
+  password: string;
   email: string;
+  role: string; 
 
   constructor(data?: any) {
     this.name = data.name;
-    this.phone = data.phone;
-    this.address = data.address;
+    this.password = data.password;
     this.email = data.date;
+    this.role = data.role; 
   }
 }

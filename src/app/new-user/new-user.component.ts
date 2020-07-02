@@ -9,6 +9,7 @@ export interface DialogData {
   address: string; 
   phone: string; 
   email: string; 
+  password: string;
 }
 
 @Component({
@@ -20,9 +21,11 @@ export class NewUserComponent implements OnInit {
 
   registerForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    address: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    phone: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    role: new FormControl('', [Validators.required, Validators.minLength(4)]),
     email: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    password: new FormControl("",
+      [Validators.required,
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]),
   });
 
   constructor(public dialogRef: MatDialogRef<NewUserComponent>) {
@@ -33,20 +36,17 @@ export class NewUserComponent implements OnInit {
 
   onSubmit() {
     const username = JSON.parse(sessionStorage.getItem("profile")).username;
-    this.dialogRef.close(new User({name: this.name.value, phone: this.phone.value, address: this.address.value, email: this.email.value}));
+    this.dialogRef.close(new User({name: this.name.value, email: this.email.value, passwor: this.password.value}));
   }
 
   get name() {
     return this.registerForm.get('name');
   }
-  get phone() {
-    return this.registerForm.get('phone');
-  }
-  get address() {
-    return this.registerForm.get('address');
-  }
   get email() {
     return this.registerForm.get('email');
+  }
+  get password() {
+    return this.registerForm.get('password');
   }
 
 

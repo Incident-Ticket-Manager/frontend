@@ -16,7 +16,7 @@ import {DeleteUserComponent} from "../delete-user/delete-user.component";
 })
 export class UserTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'phone', 'address', 'mail', 'actions'];
+  displayedColumns: string[] = ['name', 'role', 'mail', 'actions'];
   public users: User[];
   public profile: Profile = JSON.parse(sessionStorage.getItem("profile"));
 
@@ -43,7 +43,7 @@ export class UserTableComponent implements OnInit {
     let result = await dialogRef.afterClosed().toPromise();
     try {
       if (result) {
-        result = await this.service.createUser(result);
+        result = await this.service.createUser(result.name, result.email, result.password);
         this.users = [...this.users, result];
         this.snackBar.open("Success : user added");
       }
@@ -63,7 +63,7 @@ export class UserTableComponent implements OnInit {
     console.log(result)
     try {
       if (result) {
-        result = await this.service.updateUser(user, result.name, result.address, result.phone, result.email);
+        result = await this.service.updateUser(user, result.name, result.email, result.password);
         this.users = await this.service.getUsers();
         this.snackBar.open("Success : user modified");
       }

@@ -17,31 +17,17 @@
 
 
     <mat-form-field appearance="outline">
-      <mat-label>Phone ...</mat-label>
-      <input matInput placeholder="Phone name..." formControlName="phone">
+      <mat-label>Password ...</mat-label>
+      <input type="password" matInput placeholder="Password ..." formControlName="password">
 
-      <mat-error
-        *ngIf="phone.invalid && (phone.dirty || phone.touched) && phone.errors.required">
-        Phone is required
+      <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
+        Password is required
       </mat-error>
-      <mat-error
-        *ngIf="phone.invalid && (phone.dirty || phone.touched) && phone.errors.minlength">
-        Phone is required
-      </mat-error>
-    </mat-form-field>
-
-
-    <mat-form-field appearance="outline">
-      <mat-label>Address ...</mat-label>
-      <input matInput placeholder="Address ..." formControlName="address">
-
-      <mat-error
-        *ngIf="address.invalid && (address.dirty || address.touched) && address.errors.required">
-        Address is required
-      </mat-error>
-      <mat-error
-        *ngIf="address.invalid && (address.dirty || address.touched) && address.errors.minlength">
-        Address is required
+      <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+        Password must contain at least one lower case letter<br>
+        Password must contain at least one upper case letter<br>
+        Password contain a least 8 characters<br>
+        Password contain a least one special character<br>
       </mat-error>
     </mat-form-field>
 

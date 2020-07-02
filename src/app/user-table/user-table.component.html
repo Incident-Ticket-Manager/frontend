@@ -7,17 +7,12 @@
         <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
       </ng-container>
   
-      <!-- Phone Column -->
-      <ng-container matColumnDef="phone">
-        <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+      <!-- role Column -->
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.role}} </mat-cell>
       </ng-container>
   
-      <!-- Address Column -->
-      <ng-container matColumnDef="address">
-        <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.address}}  </mat-cell>
-      </ng-container>
 
       <!-- Email Column -->
       <ng-container matColumnDef="mail">
