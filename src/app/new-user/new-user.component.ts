@@ -3,8 +3,6 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from "../model/User";
 
-
-
 export interface DialogData {
   name: string;
   address: string; 
