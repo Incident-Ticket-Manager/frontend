@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from "../model/User";
+import {PasswordMatchValidator} from "../register/validators/PasswordMatchValidator";
 
 export interface DialogData {
   name: string;
-  address: string; 
-  phone: string; 
   email: string; 
+  passwordConfirmation: string;
   password: string;
 }
 
@@ -19,13 +19,13 @@ export interface DialogData {
 export class NewUserComponent implements OnInit {
 
   registerForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    role: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    email: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    username: new FormControl("", [Validators.required, Validators.minLength(4)]),
+    email: new FormControl("", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
     password: new FormControl("",
       [Validators.required,
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]),
-  });
+    passwordConfirmation: new FormControl("", [Validators.required])
+  }, [PasswordMatchValidator.passwordMatch]);
 
   constructor(public dialogRef: MatDialogRef<NewUserComponent>) {
   }
@@ -35,6 +35,7 @@ export class NewUserComponent implements OnInit {
 
   async onSubmit() {
     const username = JSON.parse(sessionStorage.getItem("profile")).username;
+    console.log("coucou"); 
     this.dialogRef.close(new User({name: this.name.value, email: this.email.value, password: this.password.value}));
   }
 
@@ -46,6 +47,9 @@ export class NewUserComponent implements OnInit {
   }
   get password() {
     return this.registerForm.get('password');
+  }
+  get passwordConfirmation() {
+    return this.registerForm.get("passwordConfirmation");
   }
 
 
