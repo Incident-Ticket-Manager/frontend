@@ -29,6 +29,8 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { ModifProjectComponent } from './modif-project/modif-project.component';
 import { DeleteProjectComponent } from './delete-project/delete-project.component';
+import { ClientTableComponent } from './client-table/client-table.component';
+import { CreateClientComponent } from './create-client/create-client.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { DeleteProjectComponent } from './delete-project/delete-project.componen
     TicketDetailComponent,
     ConfirmModalComponent,
     ModifProjectComponent,
-    DeleteProjectComponent
+    DeleteProjectComponent,
+    ClientTableComponent,
+    CreateClientComponent
   ],
   imports: [
     HttpClientModule,

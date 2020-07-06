@@ -13,19 +13,19 @@ export class ProjectService {
   ) {
   }
 
-  async getProjects() {
+  getProjects() {
     return this.http.get<Project[]>(`${this.api}/projects`).toPromise();
   }
 
-  async createProject(project: Project) {
+  createProject(project: Project) {
     return this.http.post<Project>(`${this.api}/projects`, {name: project.name}).toPromise();
   }
 
-  async updateProjectName(project: Project, newName: string) {
+  updateProjectName(project: Project, newName: string) {
     return this.http.put<Project>(`${this.api}/projects/${project.name}`, {name: newName}).toPromise();
   }
 
-  async deleteProject(project: Project) {
+  deleteProject(project: Project) {
     const name = project.name.replace(/\s/g, '%20');
     return this.http.delete(`${this.api}/projects/${name}`).toPromise();
   }
