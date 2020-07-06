@@ -29,6 +29,8 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { ModifProjectComponent } from './modif-project/modif-project.component';
 import { DeleteProjectComponent } from './delete-project/delete-project.component';
+import { FormTicketComponent } from './form-ticket/form-ticket.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { DeleteProjectComponent } from './delete-project/delete-project.componen
     TicketDetailComponent,
     ConfirmModalComponent,
     ModifProjectComponent,
-    DeleteProjectComponent
+    DeleteProjectComponent,
+    FormTicketComponent
   ],
   imports: [
     HttpClientModule,
@@ -61,7 +64,8 @@ import { DeleteProjectComponent } from './delete-project/delete-project.componen
     MatProgressSpinnerModule,
     MatIconModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

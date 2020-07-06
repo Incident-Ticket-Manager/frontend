@@ -41,3 +41,7 @@ p {
     padding: 1rem !important;
   }
 }
+
+.ticket-modal {
+  overflow: hidden!important;
+}

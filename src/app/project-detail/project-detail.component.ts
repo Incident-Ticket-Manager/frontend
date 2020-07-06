@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProjectService} from '../services/project.service';
 import {Project} from '../model/Project';
 import {first} from 'rxjs/operators';
@@ -7,6 +7,10 @@ import {MatDialog} from '@angular/material/dialog';
 import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
 import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 import {ActivatedRoute} from "@angular/router";
+import {FormTicketComponent} from '../form-ticket/form-ticket.component';
+import {MatTableDataSource} from '@angular/material/table';
+import {TicketModel} from '../model/TicketModel';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-project-detail',
@@ -15,6 +19,10 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProjectDetailComponent implements OnInit {
   project: Project;
+  dataSource: MatTableDataSource<TicketModel>;
+  @ViewChild('paginator') set matPaginator(paginator: MatPaginator) {
+    this.dataSource.paginator = paginator;
+  }
 
   constructor(
     private projectService: ProjectService,
@@ -28,14 +36,23 @@ export class ProjectDetailComponent implements OnInit {
     const projectName = this.route.snapshot.paramMap.get("name");
     this.projectService.getProjectDetail(projectName).pipe(first()).subscribe(res => {
       this.project = res;
+      this.dataSource = new MatTableDataSource<TicketModel>(this.project.tickets);
       this.project.ticketStats = new TicketStats(this.project.ticketStats);
     });
   }
 
   openTicketDetail(ticket) {
-    this.dialog.open(TicketDetailComponent, {
+    const modal = this.dialog.open(TicketDetailComponent, {
       width: '500px',
       data: ticket
+    });
+
+    modal.afterClosed().pipe(first()).subscribe(() => {
+      this.projectService.getProjectDetail('test').pipe(first()).subscribe(res => {
+        this.project = res;
+        this.project.ticketStats = new TicketStats(this.project.ticketStats);
+        this.dataSource.data = this.project.tickets;
+      });
     });
   }
 
@@ -43,6 +60,25 @@ export class ProjectDetailComponent implements OnInit {
     this.dialog.open(ConfirmModalComponent, {
       width: '500px',
       data: this.project
+    });
+  }
+
+  onAddTicketClick() {
+    const modal = this.dialog.open(FormTicketComponent, {
+      width: '500px',
+      height: '400px',
+      data: {
+        project: this.project.name
+      },
+      panelClass: ['ticket-modal']
+    });
+
+    modal.afterClosed().pipe(first()).subscribe(() => {
+      this.projectService.getProjectDetail('test').pipe(first()).subscribe(res => {
+        this.project = res;
+        this.project.ticketStats = new TicketStats(this.project.ticketStats);
+        this.dataSource.data = this.project.tickets;
+      });
     });
   }
 

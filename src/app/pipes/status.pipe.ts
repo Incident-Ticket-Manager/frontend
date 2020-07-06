@@ -9,8 +9,10 @@ export class StatusPipe implements PipeTransform {
     switch (value) {
       case 'Open':
         return 'Ouvert';
-      case 'Close':
-        return 'Fermé';
+      case 'Resolved':
+        return 'Résolu';
+      case 'In progress':
+        return 'En cours de résolution';
       default:
         return 'Inconnu';
     }

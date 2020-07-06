@@ -20,8 +20,8 @@ section + section {
   position: fixed;
   display: flex;
   flex-direction: column;
-  right: 60px;
-  bottom: 70px;
+  right: 40px;
+  bottom: 20px;
   min-height: 80px;
   justify-content: space-between;
   align-content: space-between;
