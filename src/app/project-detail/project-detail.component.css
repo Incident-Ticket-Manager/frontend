@@ -35,3 +35,9 @@ mat-paginator, table {
 .table-column {
   width: 20%;
 }
+
+.back__button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}

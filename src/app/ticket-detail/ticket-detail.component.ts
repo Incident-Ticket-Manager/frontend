@@ -6,6 +6,7 @@ import {first} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormTicketComponent} from '../form-ticket/form-ticket.component';
 import {TicketStats} from '../model/ticket-stats';
+import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -76,5 +77,20 @@ export class TicketDetailComponent implements OnInit {
 
   canUpdate() {
     return this.data.status !== 'Resolved';
+  }
+
+  onDeleteClick() {
+    const modal = this.dialog.open(ConfirmModalComponent, {
+      width: '500px',
+      data: {
+        itemModel: 'ticket',
+        name: this.data.title,
+        ticket: this.data
+      }
+    });
+
+    modal.afterClosed().pipe(first()).subscribe(
+      () => this.dialogRef.close()
+    );
   }
 }

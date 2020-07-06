@@ -1,4 +1,5 @@
 <div class="project-detail-content" *ngIf="!!project">
+  <p (click)="goBack()" class="back__button"><mat-icon>arrow_back</mat-icon> Revenir à l'accueil</p>
   <h1>Projet {{ project.name }}</h1>
   <section>
     <h2>A Propos</h2>

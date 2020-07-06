@@ -14,4 +14,5 @@
   <button mat-raised-button cdkFocusInitial color="primary" *ngIf="!data.userName" (click)="onAssignClick()">Me l'assigner</button>
   <button mat-raised-button cdkFocusInitial color="primary" *ngIf="canResolve()" (click)="onResolveClick()">Résoudre</button>
   <button mat-raised-button cdkFocusInitial *ngIf="canUpdate()" color="primary" (click)="onUpdateClick()">Modifier</button>
+  <button mat-raised-button cdkFocusInitial color="warn" (click)="onDeleteClick()">Supprimer</button>
 </div>

@@ -5,6 +5,8 @@ import {ProjectService} from '../services/project.service';
 import {first} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {TicketService} from '../services/ticket.service';
+import {toTitleCase} from 'codelyzer/util/utils';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -15,8 +17,9 @@ export class ConfirmModalComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<ConfirmModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Project,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private projectService: ProjectService,
+    private ticketService: TicketService,
     private snackService: MatSnackBar,
     private router: Router
   ) { }
@@ -29,23 +32,33 @@ export class ConfirmModalComponent implements OnInit {
   }
 
   onDeleteClick() {
-    this.projectService.deleteProject(this.data)
-      .then(() => this.showSuccessSnackBar())
-      .catch(() => this.showErrorSnackBar())
-      .finally(() => {
-        this.dialogRef.close();
-        this.router.navigateByUrl('');
-      });
+    if (!!this.data.project) {
+      this.projectService.deleteProject(this.data.project)
+        .then(() => this.showSuccessSnackBar())
+        .catch(() => this.showErrorSnackBar())
+        .finally(() => {
+          this.dialogRef.close();
+          this.router.navigateByUrl('');
+        });
+      return;
+    }
+
+    this.ticketService.deleteTicket(this.data.ticket.id)
+      .pipe(first())
+      .subscribe(
+        () => this.showSuccessSnackBar(),
+        () => this.showErrorSnackBar(),
+        () => this.dialogRef.close());
   }
 
   showSuccessSnackBar() {
-    this.snackService.open('Projet supprimé !', '', {
+    this.snackService.open(`${this.data.itemModel} supprimé !`, '', {
       duration: 2000
     });
   }
 
   showErrorSnackBar() {
-    this.snackService.open('Erreur dans la suppression du projet', '', {
+    this.snackService.open(`Erreur dans la suppression du ${this.data.itemModel}`, '', {
       duration: 2000
     });
   }

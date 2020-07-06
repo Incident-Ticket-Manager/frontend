@@ -6,7 +6,7 @@ import {TicketStats} from '../model/ticket-stats';
 import {MatDialog} from '@angular/material/dialog';
 import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
 import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormTicketComponent} from '../form-ticket/form-ticket.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {TicketModel} from '../model/TicketModel';
@@ -27,7 +27,8 @@ export class ProjectDetailComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   readonly DISPLAYED_COLUMNS = ['id', 'date', 'title', 'client', 'state'];
@@ -59,7 +60,11 @@ export class ProjectDetailComponent implements OnInit {
   onDeleteClick() {
     this.dialog.open(ConfirmModalComponent, {
       width: '500px',
-      data: this.project
+      data: {
+        itemModel: 'projet',
+        name: this.project.name,
+        project: this.project
+      }
     });
   }
 
@@ -80,6 +85,10 @@ export class ProjectDetailComponent implements OnInit {
         this.dataSource.data = this.project.tickets;
       });
     });
+  }
+
+  goBack() {
+    this.router.navigateByUrl('');
   }
 
 }

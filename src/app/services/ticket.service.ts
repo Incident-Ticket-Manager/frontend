@@ -35,4 +35,8 @@ export class TicketService {
   updateTicket(ticketId, newTicket) {
     return this.http.put(`${this.api}/tickets/${ticketId}`, newTicket);
   }
+
+  deleteTicket(ticketId) {
+    return this.http.delete(`${this.api}/tickets/${ticketId}`);
+  }
 }
