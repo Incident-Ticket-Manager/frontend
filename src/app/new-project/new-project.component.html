@@ -1,20 +1,18 @@
 <h1>Create Project</h1>
 <div class="d-flex flex-column">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline">
-      <mat-label>Project name ...</mat-label>
-      <input matInput placeholder="Project name..." formControlName="projectname">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Project name ...</mat-label>
+        <input matInput placeholder="Project name..." formControlName="projectname">
 
-      <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
-        Password is required
-      </mat-error>
-      <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
-        Password must contain at least one lower case letter<br>
-        Password must contain at least one upper case letter<br>
-        Password contain a least 8 characters<br>
-        Password contain a least one special character<br>
-      </mat-error>
-    </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">Create</button>
-  </form>
+        <mat-error
+          *ngIf="projectname.invalid && (projectname.dirty || projectname.touched) && projectname.errors.required">
+          projectname is required
+        </mat-error>
+        <mat-error
+          *ngIf="projectname.invalid && (projectname.dirty || projectname.touched) && projectname.errors.minlength">
+          projectname is required
+        </mat-error>
+      </mat-form-field>
+    </form> 
 </div>

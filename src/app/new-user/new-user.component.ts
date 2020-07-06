@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from "../model/User";
 
 
+
 export interface DialogData {
   name: string;
   address: string; 
@@ -34,9 +35,9 @@ export class NewUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  async onSubmit() {
     const username = JSON.parse(sessionStorage.getItem("profile")).username;
-    this.dialogRef.close(new User({name: this.name.value, email: this.email.value, passwor: this.password.value}));
+    this.dialogRef.close(new User({name: this.name.value, email: this.email.value, password: this.password.value}));
   }
 
   get name() {

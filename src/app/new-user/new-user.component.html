@@ -15,18 +15,18 @@
       </mat-error>
     </mat-form-field>
     
-
     <mat-form-field appearance="outline">
-      <mat-label>Password ...</mat-label>
-      <input type="password" matInput placeholder="Password ..." formControlName="password">
-
-      <mat-error
-        *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
+        <mat-label>Password ...</mat-label>
+        <input matInput type="password" placeholder="Password..." formControlName="password">
+        
+      <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
         Password is required
       </mat-error>
-      <mat-error
-        *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.minlength">
-        Password is required
+      <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+        Password must contain at least one lower case letter<br>
+        Password must contain at least one upper case letter<br>
+        Password contain a least 8 characters<br>
+        Password contain a least one special character<br>
       </mat-error>
     </mat-form-field>
 
