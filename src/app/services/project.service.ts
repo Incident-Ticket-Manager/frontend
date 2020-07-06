@@ -18,11 +18,11 @@ export class ProjectService {
   }
 
   async createProject(project: Project) {
-    return this.http.post<Project>(`${this.api}/projects`, project).toPromise();
+    return this.http.post<Project>(`${this.api}/projects`, {name: project.name}).toPromise();
   }
 
   async updateProjectName(project: Project, newName: string) {
-    return this.http.put<Project>(`${this.api}/projects`, {name: project.name, newName}).toPromise();
+    return this.http.put<Project>(`${this.api}/projects/${project.name}`, {name: newName}).toPromise();
   }
 
   async deleteProject(project: Project) {
