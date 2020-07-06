@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Project} from "../model/Project";
 
@@ -14,11 +14,14 @@ export interface DialogData {
 })
 export class ModifProjectComponent implements OnInit {
 
-  registerForm = new FormGroup({
-    projectname: new FormControl('', [Validators.required, Validators.minLength(4)]),
-  });
+  registerForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<ModifProjectComponent>) {
+  constructor(public dialogRef: MatDialogRef<ModifProjectComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.registerForm = new FormGroup({
+      projectname: new FormControl(data.name, [Validators.required, Validators.minLength(4)]),
+    });
   }
 
   ngOnInit(): void {

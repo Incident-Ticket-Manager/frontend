@@ -58,10 +58,11 @@ export class ProjectTableComponent implements OnInit {
   async handleClickModifProject(project: Project) {
     const dialogRef = this.dialog.open(ModifProjectComponent, {
       width: "300px",
+      data: {name: project.name}
     });
 
     let result = await dialogRef.afterClosed().toPromise();
-    console.log(result)
+
     try {
       if (result) {
         result = await this.service.updateProjectName(project, result.name);

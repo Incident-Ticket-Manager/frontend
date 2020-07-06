@@ -6,6 +6,7 @@ import {TicketStats} from '../model/ticket-stats';
 import {MatDialog} from '@angular/material/dialog';
 import {TicketDetailComponent} from '../ticket-detail/ticket-detail.component';
 import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-project-detail',
@@ -17,14 +18,15 @@ export class ProjectDetailComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: ActivatedRoute
   ) { }
 
   readonly DISPLAYED_COLUMNS = ['id', 'date', 'title', 'client', 'state'];
 
   ngOnInit(): void {
-    // @TODO replace 'test' by the project name
-    this.projectService.getProjectDetail('test').pipe(first()).subscribe(res => {
+    const projectName = this.route.snapshot.paramMap.get("name");
+    this.projectService.getProjectDetail(projectName).pipe(first()).subscribe(res => {
       this.project = res;
       this.project.ticketStats = new TicketStats(this.project.ticketStats);
     });
