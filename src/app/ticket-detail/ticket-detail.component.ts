@@ -38,12 +38,12 @@ export class TicketDetailComponent implements OnInit {
       panelClass: ['ticket-modal']
     });
 
-    // modal.afterClosed().pipe(first()).subscribe(() => {
-    //   this.projectService.getProjectDetail('test').pipe(first()).subscribe(res => {
-    //     this.project = res;
-    //     this.project.ticketStats = new TicketStats(this.project.ticketStats);
-    //   });
-    // });
+    modal.afterClosed().pipe(first()).subscribe(
+      res => {
+        this.data = new TicketModel(res);
+        },
+      () => this.snackService.open('Error while assigning ticket', null, { duration: 3000})
+    );
   }
 
   onAssignClick() {
@@ -51,12 +51,9 @@ export class TicketDetailComponent implements OnInit {
       .pipe(first())
       .subscribe(
         res => {
-            this.snackService.open('Ticket have successfully been assigned to you', null, {duration: 3000});
+            this.snackService.open('Ticket have successfully been updated', null, {duration: 3000});
             this.data = new TicketModel(res);
-            this.data.userName = JSON.parse(sessionStorage.getItem('profile')).username;
-            },
-        () => this.snackService.open('Error while assigning ticket', null, { duration: 3000})
-      );
+            });
   }
 
   onResolveClick() {
@@ -75,5 +72,9 @@ export class TicketDetailComponent implements OnInit {
     return !!this.data.userName
       && this.data.status !== 'Resolved'
       && this.data.userName === JSON.parse(sessionStorage.getItem('profile')).username;
+  }
+
+  canUpdate() {
+    return this.data.status !== 'Resolved';
   }
 }

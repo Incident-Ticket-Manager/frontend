@@ -19,8 +19,8 @@ export class FormTicketComponent implements OnInit {
   clients$: Observable<Client[]>;
   ticketForm = new FormGroup({
     title: new FormControl(!!this.data.ticket ? this.data.ticket.title : '', Validators.required),
-    detail: new FormControl(this.data.ticket ? this.data.ticket.detail : '', Validators.required),
-    client: new FormControl(!!this.data.ticket ? this.data.ticket.client : '', Validators.required)
+    detail: new FormControl(this.data.ticket ? this.data.ticket.content : '', Validators.required),
+    client: new FormControl(!!this.data.ticket ? this.data.ticket.client.id : '', Validators.required)
   });
 
   constructor(
@@ -44,17 +44,31 @@ export class FormTicketComponent implements OnInit {
       return;
     }
 
+    if (!!this.data.ticket) {
+      const updatedTicket = new TicketModel({
+        title: this.ticketForm.get('title').value,
+        content: this.ticketForm.get('detail').value,
+        client: this.ticketForm.get('client').value,
+      });
+
+      this.ticketService.updateTicket(this.data.ticket.id, updatedTicket)
+        .pipe(first())
+        .subscribe(
+          res => this.dialogRef.close(new TicketModel(res)),
+          () => {
+            this.snackService.open('Error while updating ticket', null, {duration: 3000});
+            this.dialogRef.close();
+          }
+        );
+      return;
+    }
+
     const newTicket = new TicketModel({
       title: this.ticketForm.get('title').value,
       content: this.ticketForm.get('detail').value,
       client: this.ticketForm.get('client').value,
       project: this.data.project ? this.data.project : this.data.ticket.projectName
     });
-
-    // if (!!this.data.ticket) {
-    //   this.
-    //   return;
-    // }
 
     this.ticketService.addTicket(newTicket)
       .pipe(first())
