@@ -4,10 +4,10 @@
   <p>Concerned project : {{ data.projectName | titlecase }}</p>
   <p>Created : {{ data.date | date }}</p>
   <p>State : {{ data.status | status }}</p>
-  <p>Title : {{ data.title }}</p>
+  <p>Title : {{ data.title | titlecase }}</p>
   <p>Detail : {{ data.content }}</p>
-  <p *ngIf="!!data.client">Rapporteur : {{ data.client.name }}</p>
-  <p>Assigned user : {{ data.userName ? data.userName : 'No one for now' }}</p>
+  <p *ngIf="!!data.client">Rapporteur : {{ data.client.name | titlecase }}</p>
+  <p>Assigned user : {{ data.userName ? data.userName : 'No one for now' |titlecase }}</p>
 </div>
 <div mat-dialog-actions class="modal-bottom">
   <button mat-stroked-button color="primary" (click)="onCancelClick()">Close</button>
