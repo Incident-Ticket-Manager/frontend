@@ -28,10 +28,11 @@ export class UserTableComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.refreshUsers();
   }
 
-  private async refreshProjects() {
+  private async refreshUsers() {
     this.users = await this.service.getUsers();
   }
 

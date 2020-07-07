@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../model/User";
 
@@ -20,7 +20,7 @@ export class UsersService {
 
   async createUser(username: string, email: string, password: string) {
     await this.http.post(`${this.api}/register`, {username, email, password}).toPromise();
-}
+  }
 
   async updateUser(user: User, newName: string, newEmail: string, newPassword: string) {
     return this.http.put<User>(`${this.api}/users`, {name: user.name, newName, newEmail, newPassword}).toPromise();
