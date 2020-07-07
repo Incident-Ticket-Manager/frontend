@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Suppression</h1>
+<h1 mat-dialog-title>Delete</h1>
 <div mat-dialog-content>
-  <p>Etes-vous sûr de vouloir supprimer le {{ data.itemModel }} {{ data.name }}?</p>
+  <p>Are you sure that you want to delete{{ data.name }} {{ data.itemModel }} ?</p>
 </div>
 <div mat-dialog-actions class="modal-bottom">
-  <button mat-button (click)="onCancelClick()">Fermer</button>
-  <button mat-raised-button cdkFocusInitial color="primary" (click)="onDeleteClick()">Supprimer</button>
+  <button mat-button (click)="onCancelClick()">Close</button>
+  <button mat-raised-button cdkFocusInitial color="primary" (click)="onDeleteClick()">Delete</button>
 </div>
