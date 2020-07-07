@@ -83,6 +83,7 @@ export class UserTableComponent implements OnInit {
     let result = await dialogRef.afterClosed().toPromise();
     try {
       if (result) {
+        console.log(user)
         result = await this.service.deleteUser(user);
         this.users = await this.service.getUsers();
         this.snackBar.open("Success : user deleted");
