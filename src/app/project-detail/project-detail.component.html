@@ -51,9 +51,16 @@
 
   <section>
     <h2>Monthly stats</h2>
-    <ng-container *ngFor="let monthStatKey of monthStatsKeys; let i = index">
-      Ticket count in <app-timestamp-to-date [date]="monthStatKey" [ticketsNumber]="monthStatsValues[i]"></app-timestamp-to-date>
-    </ng-container>
+
+    <div style="display: block">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="true"
+              [chartType]="'bar'">
+      </canvas>
+    </div>
   </section>
 
   <div class="buttons-block">

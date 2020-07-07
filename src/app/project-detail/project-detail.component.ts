@@ -20,9 +20,11 @@ import {MatPaginator} from '@angular/material/paginator';
 export class ProjectDetailComponent implements OnInit {
   project: Project;
   dataSource: MatTableDataSource<TicketModel>;
+
   @ViewChild('paginator') set matPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
   }
+
   monthStatsKeys: Date[];
   monthStatsValues: number[];
 
@@ -31,9 +33,21 @@ export class ProjectDetailComponent implements OnInit {
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+  }
 
   readonly DISPLAYED_COLUMNS = ['id', 'date', 'title', 'client', 'state'];
+
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    scales: {
+      yAxes: [{ticks: {beginAtZero: true}}]
+    }
+  };
+  public barChartLabels = [];
+  public barChartData = [{data: [], label: '', backgroundColor: '', hoverBackgroundColor: ''}];
+
 
   ngOnInit(): void {
     const projectName = this.route.snapshot.paramMap.get("name");
@@ -41,8 +55,16 @@ export class ProjectDetailComponent implements OnInit {
       this.project = res;
       this.dataSource = new MatTableDataSource<TicketModel>(this.project.tickets);
       this.project.ticketStats = new TicketStats(this.project.ticketStats);
-      this.monthStatsKeys = Object.keys(this.project.monthStats).map(timestamp => new Date(Number(timestamp)));
+      this.monthStatsKeys = Object.keys(this.project.monthStats)
+        .map(timestamp => new Date(Number(timestamp)));
       this.monthStatsValues = Object.values(this.project.monthStats);
+      this.barChartLabels = this.monthStatsKeys.map(date => date.toLocaleString('default', { month: 'long', year: "numeric"}));
+      this.barChartData = [{
+        data: Array.from(this.monthStatsValues),
+        label: 'Tickets Issued Per Month',
+        backgroundColor: '#42A5F5',
+        hoverBackgroundColor: '#1E88E5'
+      }];
     });
   }
 
