@@ -11,6 +11,8 @@ import {FormTicketComponent} from '../form-ticket/form-ticket.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {TicketModel} from '../model/TicketModel';
 import {MatPaginator} from '@angular/material/paginator';
+import {AddUserProjectModalComponent} from '../add-user-project-modal/add-user-project-modal.component';
+import {DeleteUserProjectModalComponent} from '../delete-user-project-modal/delete-user-project-modal.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -93,6 +95,42 @@ export class ProjectDetailComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('');
+  }
+
+  showAddUserModal() {
+    const modal = this.dialog.open(AddUserProjectModalComponent, {
+      width: '500px',
+      height: '220px',
+      data: {
+        project: this.project.name
+      }
+    });
+
+    modal.afterClosed().pipe(first()).subscribe(() => {
+      this.projectService.getProjectDetail(this.project.name).pipe(first()).subscribe(res => {
+        this.project = res;
+        this.project.ticketStats = new TicketStats(this.project.ticketStats);
+        this.dataSource.data = this.project.tickets;
+      });
+    });
+  }
+
+  showDeleteUserModal() {
+    const modal = this.dialog.open(DeleteUserProjectModalComponent, {
+      width: '500px',
+      height: '220px',
+      data: {
+        project: this.project
+      }
+    });
+
+    modal.afterClosed().pipe(first()).subscribe(() => {
+      this.projectService.getProjectDetail(this.project.name).pipe(first()).subscribe(res => {
+        this.project = res;
+        this.project.ticketStats = new TicketStats(this.project.ticketStats);
+        this.dataSource.data = this.project.tickets;
+      });
+    });
   }
 
 }

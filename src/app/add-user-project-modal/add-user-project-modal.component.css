@@ -1,0 +1,13 @@
+.add-user-project-modal {
+  height: 200px;
+}
+
+.modal-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  width: 40%;
+  outline: none;
+}

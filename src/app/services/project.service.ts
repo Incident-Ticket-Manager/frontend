@@ -34,4 +34,14 @@ export class ProjectService {
     name.replace(/\s/g, '%20');
     return this.http.get<Project>(`${this.api}/projects/${name}`);
   }
+
+  addUserToProject(body: any) {
+    return this.http.post(`${this.api}/projects/users`, body).toPromise();
+  }
+
+  deleteUserFromProject(projectName, userName) {
+    projectName.replace(/\s/g, '%20');
+    userName.replace(/\s/g, '%20');
+    return this.http.delete(`${this.api}/projects/${projectName}/users/${userName}`).toPromise();
+  }
 }

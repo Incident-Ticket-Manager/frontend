@@ -37,6 +37,8 @@ import { ClientTableComponent } from './client-table/client-table.component';
 import { CreateClientComponent } from './create-client/create-client.component';
 import { UpdateClientComponent } from './update-client/update-client.component';
 import { ChartsModule } from 'ng2-charts';
+import { AddUserProjectModalComponent } from './add-user-project-modal/add-user-project-modal.component';
+import { DeleteUserProjectModalComponent } from './delete-user-project-modal/delete-user-project-modal.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { ChartsModule } from 'ng2-charts';
     MonthPipe,
     ClientTableComponent,
     CreateClientComponent,
-    UpdateClientComponent
+    UpdateClientComponent,
+    AddUserProjectModalComponent,
+    DeleteUserProjectModalComponent
   ],
   imports: [
     HttpClientModule,

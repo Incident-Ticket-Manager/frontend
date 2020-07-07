@@ -40,4 +40,12 @@ mat-paginator, table {
   cursor: pointer;
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
+}
+
+.add__button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 12px;
 }

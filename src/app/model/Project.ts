@@ -1,5 +1,6 @@
 import {TicketStats} from './ticket-stats';
 import {TicketModel} from './TicketModel';
+import {User} from './User';
 
 export class Project {
   name: string;
@@ -9,6 +10,7 @@ export class Project {
   monthStats: any;
   isAdmin: boolean;
   date: Date;
+  users: User[];
 
   constructor(data?: any) {
     this.name = data.name;
@@ -18,5 +20,6 @@ export class Project {
     this.isAdmin = !!data.isAdmin ? data.isAdmin : null;
     this.date = data.date;
     this.monthStats = data.monthStats;
+    this.users = data.users;
   }
 }

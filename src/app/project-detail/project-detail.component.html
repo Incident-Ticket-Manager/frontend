@@ -4,7 +4,17 @@
   <section>
     <h2>About</h2>
     <div>Creation date: {{ project.date | date: 'MM-dd-yyyy' }}</div>
-    <div>Administrator: {{ project.admin }}</div>
+    <div>Administrator: {{ project.admin | titlecase }}</div>
+    <div>Developers:
+      <span *ngIf="project.users.length === 0">No one for now</span>
+      <span *ngFor="let user of project.users; let i = index">
+        {{ user.username | titlecase}}
+        <span *ngIf="i !== project.users.length - 1">, </span>
+      </span>
+    </div>
+    <br/>
+    <div *ngIf="project.isAdmin" class="add__button" (click)="showAddUserModal()"><mat-icon>add</mat-icon>Add developer</div>
+    <div *ngIf="project.isAdmin" class="add__button" (click)="showDeleteUserModal()"><mat-icon>delete</mat-icon>Remove developer</div>
   </section>
 
   <section>
