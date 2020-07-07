@@ -52,7 +52,7 @@
   <section>
     <h2>Statistiques mensuelles</h2>
     <ng-container *ngFor="let monthStatKey of monthStatsKeys; let i = index">
-      <app-timestamp-to-date [date]="monthStatKey" [ticketsNumber]="monthStatsValues[i]"></app-timestamp-to-date>
+      Nombre de tickets en <app-timestamp-to-date [date]="monthStatKey" [ticketsNumber]="monthStatsValues[i]"></app-timestamp-to-date>
     </ng-container>
   </section>
 
