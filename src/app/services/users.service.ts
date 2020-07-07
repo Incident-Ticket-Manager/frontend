@@ -27,7 +27,6 @@ export class UsersService {
   }
 
   async deleteUser(user: User) {
-    console.log(user.username)
     const name = user.username.replace(/\s/g, '%20');
     return this.http.delete(`${this.api}/users/${name}`).toPromise();
   }

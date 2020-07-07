@@ -44,7 +44,6 @@ export class UserTableComponent implements OnInit {
     let result = await dialogRef.afterClosed().toPromise();
     try {
       if (result) {
-        console.log(result); 
         result = await this.service.createUser(result.name, result.email, result.password);
         this.users = [...this.users, result];
         this.snackBar.open("Success : user added");
@@ -62,7 +61,6 @@ export class UserTableComponent implements OnInit {
     });
 
     let result = await dialogRef.afterClosed().toPromise();
-    console.log(result)
     try {
       if (result) {
         result = await this.service.updateUser(user, result.name, result.email, result.password);
@@ -83,7 +81,6 @@ export class UserTableComponent implements OnInit {
     let result = await dialogRef.afterClosed().toPromise();
     try {
       if (result) {
-        console.log(user)
         result = await this.service.deleteUser(user);
         this.users = await this.service.getUsers();
         this.snackBar.open("Success : user deleted");
