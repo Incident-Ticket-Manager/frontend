@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add developer to project {{ data.project }}</h1>
+<h1 mat-dialog-title>Add developer to project {{ data.project | titlecase }}</h1>
 <div mat-dialog-content class="add-user-project-modal">
   <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">

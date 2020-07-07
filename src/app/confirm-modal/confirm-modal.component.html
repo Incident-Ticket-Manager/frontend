@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Delete</h1>
 <div mat-dialog-content>
-  <p>Are you sure that you want to delete{{ data.name }} {{ data.itemModel }} ?</p>
+  <p>Are you sure that you want to delete{{ data.name | titlecase }} {{ data.itemModel }} ?</p>
 </div>
 <div mat-dialog-actions class="modal-bottom">
   <button mat-button (click)="onCancelClick()">Close</button>

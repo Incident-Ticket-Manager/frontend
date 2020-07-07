@@ -4,13 +4,13 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.name | titlecase}} </mat-cell>
     </ng-container>
 
     <!-- Admin Column -->
     <ng-container matColumnDef="admin">
       <mat-header-cell *matHeaderCellDef> Admin </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.admin}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.admin | titlecase}} </mat-cell>
     </ng-container>
 
     <!-- Date Column -->
