@@ -42,11 +42,18 @@
   </section>
 
   <section>
-    <h2>Statistiques</h2>
+    <h2>Statistiques globales</h2>
     <div>Nombre total d'incidents: {{ project.ticketStats.total }}</div>
     <div>Nombre d'incidents ouverts: {{ project.ticketStats.open }}</div>
     <div>Nombre d'incidents en cours: {{ project.ticketStats.inProgress }}</div>
     <div>Nombre d'incidents résolus: {{ project.ticketStats.resolved }}</div>
+  </section>
+
+  <section>
+    <h2>Statistiques mensuelles</h2>
+    <ng-container *ngFor="let monthStatKey of monthStatsKeys; let i = index">
+      <app-timestamp-to-date [date]="monthStatKey" [ticketsNumber]="monthStatsValues[i]"></app-timestamp-to-date>
+    </ng-container>
   </section>
 
   <div class="buttons-block">

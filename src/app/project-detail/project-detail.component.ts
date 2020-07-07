@@ -23,6 +23,8 @@ export class ProjectDetailComponent implements OnInit {
   @ViewChild('paginator') set matPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
   }
+  monthStatsKeys: Date[];
+  monthStatsValues: number[];
 
   constructor(
     private projectService: ProjectService,
@@ -39,6 +41,8 @@ export class ProjectDetailComponent implements OnInit {
       this.project = res;
       this.dataSource = new MatTableDataSource<TicketModel>(this.project.tickets);
       this.project.ticketStats = new TicketStats(this.project.ticketStats);
+      this.monthStatsKeys = Object.keys(this.project.monthStats).map(timestamp => new Date(Number(timestamp)));
+      this.monthStatsValues = Object.values(this.project.monthStats);
     });
   }
 

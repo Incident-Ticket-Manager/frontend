@@ -31,6 +31,8 @@ import { ModifProjectComponent } from './modif-project/modif-project.component';
 import { DeleteProjectComponent } from './delete-project/delete-project.component';
 import { FormTicketComponent } from './form-ticket/form-ticket.component';
 import {MatSelectModule} from '@angular/material/select';
+import { TimestampToDateComponent } from './timestamp-to-date/timestamp-to-date.component';
+import { MonthPipe } from './pipes/month.pipe';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import {MatSelectModule} from '@angular/material/select';
     ConfirmModalComponent,
     ModifProjectComponent,
     DeleteProjectComponent,
-    FormTicketComponent
+    FormTicketComponent,
+    TimestampToDateComponent,
+    MonthPipe
   ],
   imports: [
     HttpClientModule,

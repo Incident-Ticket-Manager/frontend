@@ -6,6 +6,7 @@ export class Project {
   admin: string;
   tickets: TicketModel[];
   ticketStats: TicketStats;
+  monthStats: any;
   isAdmin: boolean;
   date: Date;
 
@@ -16,5 +17,6 @@ export class Project {
     this.ticketStats = !!data.ticketStats ? data.ticketStats : null;
     this.isAdmin = !!data.isAdmin ? data.isAdmin : null;
     this.date = data.date;
+    this.monthStats = data.monthStats;
   }
 }
