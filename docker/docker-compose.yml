@@ -1,13 +1,13 @@
-version: "3.3"
+	version: "3.3"
 
-services:
-    itm:
-        image: thomaslacaze/itm-frontend:latest
-        container_name: itm
-        environment:
-        - TZ=Europe/Europe
-        restart: unless-stopped
-        labels:
-        - traefik.http.routers.itm.rule=Host(`itm.thomaslacaze.fr`)
-        - traefik.http.routers.itm.tls=true
-        - traefik.http.routers.itm.tls.certresolver=le
+	services:
+	itm:
+		image: thomaslacaze/itm-frontend:latest
+		container_name: itm
+		environment:
+				- TZ=Europe/Europe
+		restart: unless-stopped
+		labels:
+				- traefik.http.routers.itm.rule=Host(`itm.thomaslacaze.fr`)
+				- traefik.http.routers.itm.tls=true
+				- traefik.http.routers.itm.tls.certresolver=le
