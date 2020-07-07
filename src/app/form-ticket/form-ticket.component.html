@@ -1,23 +1,23 @@
-<h1 mat-dialog-title>Créer un incident</h1>
+<h1 mat-dialog-title>Create an incident</h1>
 <div mat-dialog-content class="ticket-modal">
     <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="outline">
-        <mat-label>Intitulé</mat-label>
+        <mat-label>Title</mat-label>
         <input matInput placeholder="Intitulé" formControlName="title">
         <mat-error *ngIf="this.ticketForm.get('title').invalid && (this.ticketForm.get('title').dirty || this.ticketForm.get('title').touched) && this.ticketForm.get('title').errors.required">
-          Vous devez renseigner un intitulé
+          Title is required
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Détail</mat-label>
+        <mat-label>Detail</mat-label>
         <textarea type="text" matInput placeholder="Détail" formControlName="detail"></textarea>
         <mat-error *ngIf="this.ticketForm.get('detail').invalid && (this.ticketForm.get('detail').dirty || this.ticketForm.get('detail').touched) && this.ticketForm.get('detail').errors.required">
-          Vous devez renseigner un intitulé
+          Detail is required
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Client concerné</mat-label>
+        <mat-label>Concerned client</mat-label>
         <mat-select formControlName="client">
           <mat-option *ngFor="let client of clients$ | async" [value]="client.id">
             {{ client.name }}
@@ -25,8 +25,8 @@
         </mat-select>
       </mat-form-field>
       <div mat-dialog-actions class="modal-bottom">
-        <button mat-stroked-button color="primary" (click)="onCancelClick()">Annuler</button>
-        <button mat-raised-button cdkFocusInitial color="primary" type="submit">Sauvegarder</button>
+        <button mat-stroked-button color="primary" (click)="onCancelClick()">Cancel</button>
+        <button mat-raised-button cdkFocusInitial color="primary" type="submit">Save</button>
       </div>
     </form>
 </div>

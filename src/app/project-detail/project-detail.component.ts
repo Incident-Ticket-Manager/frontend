@@ -53,7 +53,7 @@ export class ProjectDetailComponent implements OnInit {
     });
 
     modal.afterClosed().pipe(first()).subscribe(() => {
-      this.projectService.getProjectDetail('test').pipe(first()).subscribe(res => {
+      this.projectService.getProjectDetail(this.project.name).pipe(first()).subscribe(res => {
         this.project = res;
         this.project.ticketStats = new TicketStats(this.project.ticketStats);
         this.dataSource.data = this.project.tickets;
@@ -65,7 +65,7 @@ export class ProjectDetailComponent implements OnInit {
     this.dialog.open(ConfirmModalComponent, {
       width: '500px',
       data: {
-        itemModel: 'projet',
+        itemModel: 'project',
         name: this.project.name,
         project: this.project
       }
@@ -83,7 +83,7 @@ export class ProjectDetailComponent implements OnInit {
     });
 
     modal.afterClosed().pipe(first()).subscribe(() => {
-      this.projectService.getProjectDetail('test').pipe(first()).subscribe(res => {
+      this.projectService.getProjectDetail(this.project.name).pipe(first()).subscribe(res => {
         this.project = res;
         this.project.ticketStats = new TicketStats(this.project.ticketStats);
         this.dataSource.data = this.project.tickets;

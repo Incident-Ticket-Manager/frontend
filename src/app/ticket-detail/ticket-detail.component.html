@@ -1,18 +1,18 @@
-<h1 mat-dialog-title>Rapport Incident</h1>
+<h1 mat-dialog-title>Incident report</h1>
 <div mat-dialog-content>
-  <p>Identifiant : {{ data.id }}</p>
-  <p>Projet concerné : {{ data.projectName | titlecase }}</p>
-  <p>Créé le : {{ data.date | date: 'dd-MM-yyyy' }}</p>
-  <p>Etat : {{ data.status | status }}</p>
-  <p>Intitulé : {{ data.title }}</p>
-  <p>Détail : {{ data.content }}</p>
+  <p>Id : {{ data.id }}</p>
+  <p>Concerned project : {{ data.projectName | titlecase }}</p>
+  <p>Created : {{ data.date | date: 'dd-MM-yyyy' }}</p>
+  <p>State : {{ data.status | status }}</p>
+  <p>Title : {{ data.title }}</p>
+  <p>Detail : {{ data.content }}</p>
   <p *ngIf="!!data.client">Rapporteur : {{ data.client.name }}</p>
-  <p>Utilisateur assigné : {{ data.userName ? data.userName : 'Aucun pour le moment' }}</p>
+  <p>Assigned user : {{ data.userName ? data.userName : 'No one for now' }}</p>
 </div>
 <div mat-dialog-actions class="modal-bottom">
-  <button mat-stroked-button color="primary" (click)="onCancelClick()">Fermer</button>
-  <button mat-raised-button cdkFocusInitial color="primary" *ngIf="!data.userName" (click)="onAssignClick()">Me l'assigner</button>
-  <button mat-raised-button cdkFocusInitial color="primary" *ngIf="canResolve()" (click)="onResolveClick()">Résoudre</button>
-  <button mat-raised-button cdkFocusInitial *ngIf="canUpdate()" color="primary" (click)="onUpdateClick()">Modifier</button>
-  <button mat-raised-button cdkFocusInitial color="warn" (click)="onDeleteClick()">Supprimer</button>
+  <button mat-stroked-button color="primary" (click)="onCancelClick()">Close</button>
+  <button mat-raised-button cdkFocusInitial color="primary" *ngIf="!data.userName" (click)="onAssignClick()">Assign to me</button>
+  <button mat-raised-button cdkFocusInitial color="primary" *ngIf="canResolve()" (click)="onResolveClick()">Resolve</button>
+  <button mat-raised-button cdkFocusInitial *ngIf="canUpdate()" color="primary" (click)="onUpdateClick()">Modify</button>
+  <button mat-raised-button cdkFocusInitial color="warn" (click)="onDeleteClick()">Delete</button>
 </div>

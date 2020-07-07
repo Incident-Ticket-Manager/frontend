@@ -8,11 +8,11 @@ export class StatusPipe implements PipeTransform {
   transform(value: unknown, ...args: unknown[]): unknown {
     switch (value) {
       case 'Open':
-        return 'Ouvert';
+        return 'Open';
       case 'Resolved':
-        return 'Résolu';
+        return 'Resolved';
       case 'In progress':
-        return 'En cours de résolution';
+        return 'In progress';
       default:
         return 'Inconnu';
     }
