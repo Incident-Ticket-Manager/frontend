@@ -49,3 +49,8 @@ mat-paginator, table {
   cursor: pointer;
   font-size: 12px;
 }
+
+.total{
+  text-align: center;
+  font-size: 1rem;
+}

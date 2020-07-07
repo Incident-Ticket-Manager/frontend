@@ -22,9 +22,11 @@ import {DeleteUserProjectModalComponent} from '../delete-user-project-modal/dele
 export class ProjectDetailComponent implements OnInit {
   project: Project;
   dataSource: MatTableDataSource<TicketModel>;
+
   @ViewChild('paginator') set matPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
   }
+
   monthStatsKeys: Date[];
   monthStatsValues: number[];
 
@@ -33,9 +35,33 @@ export class ProjectDetailComponent implements OnInit {
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+  }
 
   readonly DISPLAYED_COLUMNS = ['id', 'date', 'title', 'client', 'state'];
+
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    scales: {
+      yAxes: [{ticks: {beginAtZero: true}}]
+    }
+  };
+  public barChartLabels = [];
+  public barChartData = [{data: [], label: '', backgroundColor: '', hoverBackgroundColor: ''}];
+
+  public pieChartLabels = ["Open", "In Progress", "Resolved"];
+  public pieChartData = [{
+    data: [], label: '', backgroundColor: [
+      'rgba(54, 162, 235, 0.8)',
+      'rgba(255, 206, 86, 0.8)',
+      'rgba(0, 200, 83, 0.8)'],
+    hoverBackgroundColor: [
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(0, 200, 83, 1)']
+  }];
+
 
   ngOnInit(): void {
     const projectName = this.route.snapshot.paramMap.get("name");
@@ -43,8 +69,19 @@ export class ProjectDetailComponent implements OnInit {
       this.project = res;
       this.dataSource = new MatTableDataSource<TicketModel>(this.project.tickets);
       this.project.ticketStats = new TicketStats(this.project.ticketStats);
-      this.monthStatsKeys = Object.keys(this.project.monthStats).map(timestamp => new Date(Number(timestamp)));
+      this.monthStatsKeys = Object.keys(this.project.monthStats)
+        .map(timestamp => new Date(Number(timestamp)));
       this.monthStatsValues = Object.values(this.project.monthStats);
+
+      this.pieChartData[0].data = [this.project.ticketStats.open, this.project.ticketStats.inProgress, this.project.ticketStats.resolved];
+
+      this.barChartLabels = this.monthStatsKeys.map(date => date.toLocaleString('default', {month: 'long', year: "numeric"}));
+      this.barChartData = [{
+        data: Array.from(this.monthStatsValues),
+        label: 'Tickets Issued Per Month',
+        backgroundColor: '#42A5F5',
+        hoverBackgroundColor: '#1E88E5'
+      }];
     });
   }
 
