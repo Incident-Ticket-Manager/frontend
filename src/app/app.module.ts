@@ -33,6 +33,10 @@ import { FormTicketComponent } from './form-ticket/form-ticket.component';
 import {MatSelectModule} from '@angular/material/select';
 import { TimestampToDateComponent } from './timestamp-to-date/timestamp-to-date.component';
 import { MonthPipe } from './pipes/month.pipe';
+import { ClientTableComponent } from './client-table/client-table.component';
+import { CreateClientComponent } from './create-client/create-client.component';
+import { UpdateClientComponent } from './update-client/update-client.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,10 @@ import { MonthPipe } from './pipes/month.pipe';
     DeleteProjectComponent,
     FormTicketComponent,
     TimestampToDateComponent,
-    MonthPipe
+    MonthPipe,
+    ClientTableComponent,
+    CreateClientComponent,
+    UpdateClientComponent
   ],
   imports: [
     HttpClientModule,
@@ -69,7 +76,8 @@ import { MonthPipe } from './pipes/month.pipe';
     MatIconModule,
     MatDialogModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    ChartsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

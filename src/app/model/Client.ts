@@ -4,6 +4,7 @@ export class Client {
   email: string;
   phone: string;
   address: string;
+  ticketCount: number;
 
   constructor(data?: any) {
     this.id = data.id;
@@ -12,4 +13,6 @@ export class Client {
     this.phone = data.phone;
     this.address = data.address;
   }
+
+
 }
