@@ -31,6 +31,8 @@ import { ModifProjectComponent } from './modif-project/modif-project.component';
 import { DeleteProjectComponent } from './delete-project/delete-project.component';
 import { ClientTableComponent } from './client-table/client-table.component';
 import { CreateClientComponent } from './create-client/create-client.component';
+import { UpdateClientComponent } from './update-client/update-client.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { CreateClientComponent } from './create-client/create-client.component';
     ModifProjectComponent,
     DeleteProjectComponent,
     ClientTableComponent,
-    CreateClientComponent
+    CreateClientComponent,
+    UpdateClientComponent
   ],
   imports: [
     HttpClientModule,
@@ -65,7 +68,8 @@ import { CreateClientComponent } from './create-client/create-client.component';
     MatProgressSpinnerModule,
     MatIconModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ChartsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

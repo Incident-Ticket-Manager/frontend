@@ -1,0 +1,51 @@
+<h1>Update Client</h1>
+<div class="d-flex flex-column">
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+    <!-- Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>Client name ...</mat-label>
+      <input matInput placeholder="Client name..." formControlName="clientName">
+
+      <mat-error
+        *ngIf="clientName.invalid && (clientName.dirty || clientName.touched) && clientName.errors.required">
+        Client name is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="outline">
+      <mat-label>Client email ...</mat-label>
+      <input type="email" matInput placeholder="Client email..." formControlName="clientEmail">
+
+      <mat-error
+        *ngIf="clientEmail.invalid && (clientEmail.dirty || clientEmail.touched) && clientEmail.errors.required">
+        Client email is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Phone -->
+    <mat-form-field appearance="outline">
+      <mat-label>Client phone ...</mat-label>
+      <input type="tel" matInput placeholder="Client phone..." formControlName="clientPhone">
+
+      <mat-error
+        *ngIf="clientPhone.invalid && (clientPhone.dirty || clientPhone.touched) && clientPhone.errors.required">
+        Client phone is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Address -->
+    <mat-form-field appearance="outline">
+      <mat-label>Client address ...</mat-label>
+      <input matInput placeholder="Client email..." formControlName="clientAddress">
+
+      <mat-error
+        *ngIf="clientAddress.invalid && (clientAddress.dirty || clientAddress.touched) && clientAddress.errors.required">
+        Client address is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit -->
+    <button type="submit" mat-raised-button color="primary">Create</button>
+  </form>
+</div>

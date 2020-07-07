@@ -30,10 +30,10 @@
       <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
       <mat-cell *matCellDef="let client">
         <ng-container>
-          <button mat-icon-button>
+          <button (click)="handleClickUpdateClient(client)" mat-icon-button>
             <mat-icon>create</mat-icon>
           </button>
-          <button  mat-icon-button>
+          <button (click)="handleClickDeleteClient(client)"  mat-icon-button>
             <mat-icon>delete</mat-icon>
           </button>
         </ng-container>
@@ -47,4 +47,14 @@
   <mat-card-actions>
     <button (click)="handleClickCreate()" mat-raised-button color="primary" >Create</button>
   </mat-card-actions>
+  <h2>Tickets Issued by Clients</h2>
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="true"
+            [chartType]="'bar'">
+    </canvas>
+  </div>
 </mat-card>

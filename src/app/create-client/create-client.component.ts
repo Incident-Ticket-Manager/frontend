@@ -25,7 +25,13 @@ export class CreateClientComponent implements OnInit {
 
   onSubmit() {
     if (this.clientForm.valid) {
-      rethis.dialogRef.close(new Client(this.clientName.value, this.clientEmail.value, this.clientPhone.value, this.clientAddress.value));
+      this.dialogRef.close(
+        new Client(null,
+          this.clientName.value,
+          this.clientEmail.value,
+          this.clientPhone.value,
+          this.clientAddress.value
+        ));
     }
   }
 
