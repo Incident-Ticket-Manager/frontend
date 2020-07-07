@@ -28,7 +28,7 @@ export class NewUserComponent implements OnInit {
 
   async onSubmit() {
     const username = JSON.parse(sessionStorage.getItem("profile")).username;
-    this.dialogRef.close(new User({name: this.registerForm.get('username').value, email: this.registerForm.get('email').value, password: this.registerForm.get('password').value}));
+    this.dialogRef.close(new User({username: this.registerForm.get('username').value, email: this.registerForm.get('email').value, password: this.registerForm.get('password').value}));
   }
 
   get username() {
