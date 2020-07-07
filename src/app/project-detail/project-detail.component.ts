@@ -48,6 +48,18 @@ export class ProjectDetailComponent implements OnInit {
   public barChartLabels = [];
   public barChartData = [{data: [], label: '', backgroundColor: '', hoverBackgroundColor: ''}];
 
+  public pieChartLabels = ["Open", "In Progress", "Resolved"];
+  public pieChartData = [{
+    data: [], label: '', backgroundColor: [
+      'rgba(54, 162, 235, 0.8)',
+      'rgba(255, 206, 86, 0.8)',
+      'rgba(0, 200, 83, 0.8)'],
+    hoverBackgroundColor: [
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(0, 200, 83, 1)']
+  }];
+
 
   ngOnInit(): void {
     const projectName = this.route.snapshot.paramMap.get("name");
@@ -58,7 +70,10 @@ export class ProjectDetailComponent implements OnInit {
       this.monthStatsKeys = Object.keys(this.project.monthStats)
         .map(timestamp => new Date(Number(timestamp)));
       this.monthStatsValues = Object.values(this.project.monthStats);
-      this.barChartLabels = this.monthStatsKeys.map(date => date.toLocaleString('default', { month: 'long', year: "numeric"}));
+
+      this.pieChartData[0].data = [this.project.ticketStats.open, this.project.ticketStats.inProgress, this.project.ticketStats.resolved];
+
+      this.barChartLabels = this.monthStatsKeys.map(date => date.toLocaleString('default', {month: 'long', year: "numeric"}));
       this.barChartData = [{
         data: Array.from(this.monthStatsValues),
         label: 'Tickets Issued Per Month',

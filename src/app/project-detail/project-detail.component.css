@@ -41,3 +41,8 @@ mat-paginator, table {
   display: flex;
   align-items: center;
 }
+
+.total{
+  text-align: center;
+  font-size: 1rem;
+}

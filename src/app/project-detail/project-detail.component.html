@@ -1,5 +1,8 @@
 <div class="project-detail-content" *ngIf="!!project">
-  <p (click)="goBack()" class="back__button"><mat-icon>arrow_back</mat-icon> Go back home</p>
+  <p (click)="goBack()" class="back__button">
+    <mat-icon>arrow_back</mat-icon>
+    Go back home
+  </p>
   <h1>{{ project.name }} project</h1>
   <section>
     <h2>About</h2>
@@ -38,15 +41,25 @@
       <tr mat-header-row *matHeaderRowDef="DISPLAYED_COLUMNS"></tr>
       <tr mat-row *matRowDef="let ticket; columns: DISPLAYED_COLUMNS;" (click)="openTicketDetail(ticket)"></tr>
     </table>
-    <mat-paginator #paginator [length]="project.tickets.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator #paginator [length]="project.tickets.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons></mat-paginator>
   </section>
 
   <section>
     <h2>General stats</h2>
-    <div>Total incidents count: {{ project.ticketStats.total }}</div>
-    <div>Open incidents count: {{ project.ticketStats.open }}</div>
-    <div>In progress incidents count: {{ project.ticketStats.inProgress }}</div>
-    <div>Resolved incidents count: {{ project.ticketStats.resolved }}</div>
+    <div class="total">Total incidents count: {{ project.ticketStats.total }}</div>
+<!--    <div>Open incidents count: {{ project.ticketStats.open }}</div>-->
+<!--    <div>In progress incidents count: {{ project.ticketStats.inProgress }}</div>-->
+<!--    <div>Resolved incidents count: {{ project.ticketStats.resolved }}</div>-->
+
+    <div style="display: block">
+      <canvas baseChart
+              [datasets]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="'pie'">
+      </canvas>
+    </div>
+
   </section>
 
   <section>
@@ -64,7 +77,10 @@
   </section>
 
   <div class="buttons-block">
-    <button mat-raised-button color="primary" class="float__button" (click)="onAddTicketClick()">Create an incident</button>
-    <button mat-stroked-button color="primary" class="float__button" *ngIf="project.isAdmin" (click)="onDeleteClick()">Close the project</button>
+    <button mat-raised-button color="primary" class="float__button" (click)="onAddTicketClick()">Create an incident
+    </button>
+    <button mat-stroked-button color="primary" class="float__button" *ngIf="project.isAdmin" (click)="onDeleteClick()">
+      Close the project
+    </button>
   </div>
 </div>
