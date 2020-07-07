@@ -23,7 +23,7 @@ export class UsersService {
   }
 
   async updateUser(user: User, newName: string, newEmail: string, newPassword: string) {
-    return this.http.put<User>(`${this.api}/users/${user.name}`, {name: newName, email: newEmail, password: newPassword}).toPromise();
+    return this.http.put<User>(`${this.api}/users/${user.username}`, {username: newName, email: newEmail, password: newPassword}).toPromise();
   }
 
   async deleteUser(user: User) {
