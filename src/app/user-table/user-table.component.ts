@@ -44,7 +44,8 @@ export class UserTableComponent implements OnInit {
     let result = await dialogRef.afterClosed().toPromise();
     try {
       if (result) {
-        result = await this.service.createUser(result.name, result.email, result.password);
+        console.log(result); 
+        result = await this.service.createUser(result.username, result.email, result.password);
         this.users = [...this.users, result];
         this.snackBar.open("Success : user added");
       }
@@ -58,6 +59,7 @@ export class UserTableComponent implements OnInit {
   async handleClickModifUser(user: User) {
     const dialogRef = this.dialog.open(ModifUserComponent, {
       width: "300px",
+      data: {name: user.name, mail: user.email, password: user.password}
     });
 
     let result = await dialogRef.afterClosed().toPromise();

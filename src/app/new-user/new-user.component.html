@@ -2,15 +2,15 @@
 <div class="d-flex flex-column">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="outline">
-        <mat-label>Project name ...</mat-label>
-        <input matInput placeholder="User name..." formControlName="name">
+        <mat-label>User name ...</mat-label>
+        <input matInput placeholder="User name..." formControlName="username">
 
         <mat-error
-          *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.required">
+          *ngIf="username.invalid && (username.dirty || username.touched) && username.errors.required">
           user name is required
         </mat-error>
         <mat-error
-          *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.minlength">
+          *ngIf="username.invalid && (username.dirty || username.touched) && username.errors.minlength">
           user name is required
         </mat-error>
       </mat-form-field>

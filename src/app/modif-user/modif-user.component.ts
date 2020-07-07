@@ -3,13 +3,6 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from "../model/User";
 
-export interface DialogData {
-  name: string;
-  address: string; 
-  phone: string; 
-  email: string; 
-}
-
 @Component({
   selector: 'app-modif-user',
   templateUrl: './modif-user.component.html',
@@ -18,7 +11,7 @@ export interface DialogData {
 export class ModifUserComponent implements OnInit {
 
   registerForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    username: new FormControl('', [Validators.required, Validators.minLength(4)]),
     email: new FormControl('', [Validators.required, Validators.minLength(4)]),
     password: new FormControl("",
       [Validators.required,
@@ -33,11 +26,11 @@ export class ModifUserComponent implements OnInit {
 
   onSubmit() {
     const username = JSON.parse(sessionStorage.getItem("profile")).username;
-    this.dialogRef.close(new User({name: this.name.value, email: this.email.value, password: this.password.value}));
+    this.dialogRef.close(new User({name: this.registerForm.get('username').value, email: this.registerForm.get('email').value, password: this.registerForm.get('password').value}));
   }
 
-  get name() {
-    return this.registerForm.get('name');
+  get username() {
+    return this.registerForm.get('username');
   }
   get email() {
     return this.registerForm.get('email');

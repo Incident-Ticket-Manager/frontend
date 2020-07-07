@@ -5,9 +5,9 @@ export class User {
   role: string; 
 
   constructor(data?: any) {
-    this.name = data.name;
+    this.name = data.username;
     this.password = data.password;
-    this.email = data.date;
+    this.email = data.email;
     this.role = data.role; 
   }
 }
