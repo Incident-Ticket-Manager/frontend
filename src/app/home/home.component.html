@@ -1,7 +1,5 @@
 <h2>Welcome {{profile.username | titlecase}}</h2>
 
 <app-project-table></app-project-table>
+<app-user-table *ngIf="profile.admin"></app-user-table>
 <app-client-table *ngIf="profile.admin"></app-client-table>
-<!--
-
--->
