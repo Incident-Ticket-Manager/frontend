@@ -1,48 +1,47 @@
-	version: "3.3"
+version: "3.3"
 
-	services:
-  
-    traefik: ##Reverse proxy
-      image: traefik:latest
-      command:
-        - --entrypoints.web.address=:80
-        - --entrypoints.websecure.address=:443
-        - --providers.docker
-        - --certificatesResolvers.le.acme.email=contact@thomaslacaze.fr
-        - --certificatesResolvers.le.acme.storage=/acme.json
-        - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
-      restart: always
-      container_name: traefik
-      ports:
-        - 80:80 # The HTTP port
-        - 443:443 # The HTTPS port
-      volumes:
-        - /var/run/docker.sock:/var/run/docker
-        - /root/docker/volumes/traefik/acme.json:/acme.json #Stockage des certs
-      labels:
-        - traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)
-        - traefik.http.routers.http-catchall.entrypoints=web
-        - traefik.http.routers.http-catchall.middlewares=redirect-to-https #On créer un middlewares permettant de rediriger tout le traffic en HTTP vers HTTPS
-        - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+services:
+  traefik: #Reverse proxy
+    image: traefik:latest
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --providers.docker
+      - --certificatesResolvers.le.acme.email=contact@thomaslacaze.fr
+      - --certificatesResolvers.le.acme.storage=/acme.json
+      - --certificatesResolvers.le.acme.httpChallenge.entryPoint=web
+    restart: always
+    container_name: traefik
+    ports:
+      - 80:80 # The HTTP port
+      - 443:443 # The HTTPS port
+    volumes:
+      - /var/run/docker.sock:/var/run/docker
+      - /root/docker/volumes/traefik/acme.json:/acme.json #Stockage des certs
+    labels:
+      - traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)
+      - traefik.http.routers.http-catchall.entrypoints=web
+      - traefik.http.routers.http-catchall.middlewares=redirect-to-https #On créer un middlewares permettant de rediriger tout le traffic en HTTP vers HTTPS
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
 
-    watchtower: # Conteneur qui nous permet d'update les autres conteneurs automatiquement. Ainsi si Github action publie une nouvelle version sur le Docker Hub elle est automatiquement déployée
-      image: containrrr/watchtower 
-      container_name: watchtower
-      restart: always
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock #WatchTower a le droit de stopper un conteneur et de le mettre à jour. Il a les droit écriture et lecture sur le service docker
-      environment:
-        - WATCHTOWER_NOTIFICATIONS=email # Envoi d'un mail alors d'un update de conteneur docker
-        - WATCHTOWER_NOTIFICATION_EMAIL_FROM=postmaster@thomaslacaze.fr
-        - WATCHTOWER_NOTIFICATION_EMAIL_TO=contact@thomaslacaze.fr
-        - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=mail.thomaslacaze.fr
-        - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=postmaster@thomaslacaze.fr
-        - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=****
-        - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=2
-        - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=*******
-      command: --interval 5 #On check tous les 5 sec si une update d'un conteneur n'est pas disponible
+  watchtower: # Conteneur qui nous permet d'update les autres conteneurs automatiquement. Ainsi si Github action publie une nouvelle version sur le Docker Hub elle est automatiquement déployée
+    image: containrrr/watchtower 
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock #WatchTower a le droit de stopper un conteneur et de le mettre à jour. Il a les droit écriture et lecture sur le service docker
+    environment:
+      - WATCHTOWER_NOTIFICATIONS=email # Envoi d'un mail alors d'un update de conteneur docker
+      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=postmaster@thomaslacaze.fr
+      - WATCHTOWER_NOTIFICATION_EMAIL_TO=contact@thomaslacaze.fr
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=mail.thomaslacaze.fr
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=postmaster@thomaslacaze.fr
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=****
+      - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=2
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=*******
+    command: --interval 5 #On check tous les 5 sec si une update d'un conteneur n'est pas disponible
 
-  itm:
+  itm: ## Le front-end 
     image: thomaslacaze/itm-frontend:latest
     container_name: itm
     environment:
