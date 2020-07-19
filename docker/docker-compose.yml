@@ -42,14 +42,14 @@
         - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=*******
       command: --interval 5 #On check tous les 5 sec si une update d'un conteneur n'est pas disponible
 
-	itm:
-		image: thomaslacaze/itm-frontend:latest
-		container_name: itm
-		environment:
-				- TZ=Europe/Europe
-		restart: unless-stopped
-		labels:
-				- traefik.http.routers.itm.rule=Host(`itm.thomaslacaze.fr`)  #Configuration du ndd pour le reverse proxy Traefik sur le router itm
-				- traefik.http.routers.itm.tls=true # Nous autorisons le HTTPS sur le routers itm
-				- traefik.http.routers.itm.tls.certresolver=le # Nous donnons comme cert resolver le (let's encrypt) qu'on à défini plutôt
+  itm:
+    image: thomaslacaze/itm-frontend:latest
+    container_name: itm
+    environment:
+        - TZ=Europe/Europe
+    restart: unless-stopped
+    labels:
+        - traefik.http.routers.itm.rule=Host(`itm.thomaslacaze.fr`)  #Configuration du ndd pour le reverse proxy Traefik sur le router itm
+        - traefik.http.routers.itm.tls=true # Nous autorisons le HTTPS sur le routers itm
+        - traefik.http.routers.itm.tls.certresolver=le # Nous donnons comme cert resolver le (let's encrypt) qu'on à défini plutôt
         - com.centurylinklabs.watchtower.enable=true # On active l'auto-update du conteneur docker 
