@@ -68,21 +68,33 @@ export class ProjectDetailComponent implements OnInit {
     this.projectService.getProjectDetail(projectName).pipe(first()).subscribe(res => {
       this.project = res;
       this.dataSource = new MatTableDataSource<TicketModel>(this.project.tickets);
+
       this.project.ticketStats = new TicketStats(this.project.ticketStats);
-      this.monthStatsKeys = Object.keys(this.project.monthStats)
-        .map(timestamp => new Date(Number(timestamp)));
-      this.monthStatsValues = Object.values(this.project.monthStats);
-
-      this.pieChartData[0].data = [this.project.ticketStats.open, this.project.ticketStats.inProgress, this.project.ticketStats.resolved];
-
-      this.barChartLabels = this.monthStatsKeys.map(date => date.toLocaleString('default', {month: 'long', year: "numeric"}));
-      this.barChartData = [{
-        data: Array.from(this.monthStatsValues),
-        label: 'Tickets Issued Per Month',
-        backgroundColor: '#42A5F5',
-        hoverBackgroundColor: '#1E88E5'
-      }];
+      this.updateCharts();
     });
+  }
+
+  private updateCharts() {
+    this.monthStatsKeys = Object.keys(this.project.monthStats)
+      .map(timestamp => new Date(Number(timestamp)));
+    this.monthStatsValues = Object.values(this.project.monthStats);
+
+    this.pieChartData[0].data = [];
+    this.pieChartData[0].data = [
+      this.project.ticketStats.open,
+      this.project.ticketStats.inProgress,
+      this.project.ticketStats.resolved
+    ];
+    this.barChartLabels = this.monthStatsKeys.map(date => date.toLocaleString('default', {
+      month: 'long',
+      year: "numeric"
+    }));
+    this.barChartData = [{
+      data: Array.from(this.monthStatsValues),
+      label: 'Tickets Issued Per Month',
+      backgroundColor: '#42A5F5',
+      hoverBackgroundColor: '#1E88E5'
+    }];
   }
 
   openTicketDetail(ticket) {
@@ -96,6 +108,7 @@ export class ProjectDetailComponent implements OnInit {
         this.project = res;
         this.project.ticketStats = new TicketStats(this.project.ticketStats);
         this.dataSource.data = this.project.tickets;
+        this.updateCharts();
       });
     });
   }
@@ -126,6 +139,7 @@ export class ProjectDetailComponent implements OnInit {
         this.project = res;
         this.project.ticketStats = new TicketStats(this.project.ticketStats);
         this.dataSource.data = this.project.tickets;
+        this.updateCharts();
       });
     });
   }
