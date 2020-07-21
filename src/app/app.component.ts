@@ -12,10 +12,14 @@ export class AppComponent {
   profile: Profile = JSON.parse(sessionStorage.getItem("profile"));
 
   constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      this.profile = JSON.parse(sessionStorage.getItem("profile"));
+    });
   }
 
   logout() {
     sessionStorage.setItem("profile", null);
     this.router.navigate(["login"]);
+
   }
 }

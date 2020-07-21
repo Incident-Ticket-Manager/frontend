@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
         this.registerForm.value.email,
         this.registerForm.value.password
       );
-      await this.router.navigate([""]);
+      await this.router.navigate(["login"]);
       this.snackBar.open("Success : Account created");
     }
   }
