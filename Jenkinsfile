@@ -6,11 +6,9 @@ pipeline {
 
   agent any
   stages {
-    stages {
-        stage('Display env') {
-            steps {
-                sh 'printenv'
-            }
+    stage('Display env') {
+        steps {
+            sh 'printenv'
         }
     }
 
