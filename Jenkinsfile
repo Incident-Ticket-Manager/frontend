@@ -8,7 +8,7 @@ pipeline {
   stages {
 
     stages {
-        stage('Build') {
+        stage('Display env') {
             steps {
                 sh 'printenv'
             }
