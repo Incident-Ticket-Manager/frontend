@@ -3,7 +3,7 @@ pipeline {
     imageName = 'thomaslacaze/itm-frontend'
     registryCredential = 'dockerhub'
   }
-  agent any  
+  agent any
   stages {
     stage('Building image') {
       steps{
