@@ -12,20 +12,25 @@ pipeline {
         }
     }
 
-    stage('Building image') {
-      steps {
-        script {
-          dockerImage = docker.build imageName + ":$BUILD_NUMBER"
-        }
+    stage('Build & Deploy Image') {
+      when {
+        tag '*'
       }
-    }
-    stage('Deploy Image') {
       steps {
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
+          script {
+            version = GIT_TAG
+            versions = version.split('\\.')
+            major = 'v'+versions[0]
+            minor = 'v'+versions[0] + '.' + versions[1]
+            patch = 'v'+version.trim()
+            docker.withRegistry('', 'registryCredential') {
+                image = docker.build imageName:latest
+                image.push()
+                image.push(major)
+                image.push(minor)
+                image.push(patch)
+            }
           }
-        }
       }
     }
   }
