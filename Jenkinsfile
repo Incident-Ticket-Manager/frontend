@@ -1,7 +1,7 @@
 pipeline {
   environment {
-  imageName = 'thomaslacaze/itm-frontend'
-  registryCredential = 'dockerCredential'
+    imageName = 'thomaslacaze/itm-frontend'
+    registryCredential = 'dockerCredential'
   }
 
   agent any
@@ -23,7 +23,7 @@ pipeline {
             major = versions[0]
             minor = versions[0] + '.' + versions[1]
             patch = version.trim()
-            docker.withRegistry('', 'registryCredential') {
+            docker.withRegistry('', registryCredential) {
                 image = docker.build imageName:latest
                 image.push()
                 image.push(major)
