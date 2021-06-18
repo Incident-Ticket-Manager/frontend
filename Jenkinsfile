@@ -24,7 +24,7 @@ pipeline {
             minor = versions[0] + '.' + versions[1]
             patch = version.trim()
             docker.withRegistry('', registryCredential) {
-                image = docker.build imageName:latest
+                image = docker.build imageName+":latest"
                 image.push()
                 image.push(major)
                 image.push(minor)
