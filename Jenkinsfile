@@ -7,24 +7,25 @@ pipeline {
     agent any
     stages {
 
-      stage('Clone repository') {
-        steps{
-          checkout scm
-        }
-      }
-
-      stage('Build image') {
-        steps{
-          app = docker.build("${env.imageName}")
-        }
-      }
-
-      stage('Push image') {
-        steps{
-          docker.withRegistry('https://registry.hub.docker.com', 'registryCredential') {
-              app.push("${env.BUILD_NUMBER}")
-              app.push("latest")
+      stage('Building image') {
+        steps {
+          script {
+            dockerImage = docker.build registry + ":$BUILD_NUMBER"
           }
+        }
+      }
+      stage('Deploy Image') {
+        steps {
+          script {
+            docker.withRegistry( '', registryCredential ) {
+              dockerImage.push()
+            }
+          }
+        }
+      }
+      stage('Remove Unused docker image') {
+        steps {
+          sh "docker rmi $imageName:$BUILD_NUMBER"
         }
       }
     }
