@@ -18,7 +18,7 @@ pipeline {
       }
       steps {
           script {
-            version = GIT_TAG
+            version = TAG_NAME
             versions = version.split('\\.')
             major = versions[0]
             minor = versions[0] + '.' + versions[1]
