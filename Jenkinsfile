@@ -20,9 +20,9 @@ pipeline {
           script {
             version = GIT_TAG
             versions = version.split('\\.')
-            major = 'v'+versions[0]
-            minor = 'v'+versions[0] + '.' + versions[1]
-            patch = 'v'+version.trim()
+            major = versions[0]
+            minor = versions[0] + '.' + versions[1]
+            patch = version.trim()
             docker.withRegistry('', 'registryCredential') {
                 image = docker.build imageName:latest
                 image.push()
