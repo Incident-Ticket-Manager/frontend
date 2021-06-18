@@ -6,7 +6,6 @@ pipeline {
 
   agent any
   stages {
-
     stages {
         stage('Display env') {
             steps {
