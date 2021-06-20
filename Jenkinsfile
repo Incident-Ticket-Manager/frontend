@@ -12,7 +12,7 @@ pipeline {
         }
     }
 
-    stage('Build & Deploy Image') {
+    stage('Build & Deploy Image release') {
       when {
         tag '*'
       }
@@ -29,6 +29,20 @@ pipeline {
                 image.push(major)
                 image.push(minor)
                 image.push(patch)
+            }
+          }
+      }
+    }
+
+    stage('Build & Deploy Image Dev') {
+      when {
+        branch 'develop'
+      }
+      steps {
+          script {
+            docker.withRegistry('', registryCredential) {
+                image = docker.build imageName+":develop"
+                image.push()
             }
           }
       }
