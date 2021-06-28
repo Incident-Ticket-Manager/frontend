@@ -52,7 +52,11 @@ steps:
     path: /drone/src/dist
   commands:
   - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/auth.service.ts
-  - cat /drone/src/src/app/services/auth.service.ts
+  - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/client.service.ts
+  - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/project.service.ts
+  - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/ticket.service.ts
+  - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/user.service.ts
+  - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/users.service.ts
   - yarn
   - yarn build
 
