@@ -1,8 +1,9 @@
-FROM node as angular-build
+FROM node:14 as angular-build
 WORKDIR /frontend
-COPY . /frontend
-RUN yarn
-RUN yarn build
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
 FROM nginx:alpine
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
