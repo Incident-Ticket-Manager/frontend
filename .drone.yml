@@ -57,8 +57,8 @@ steps:
   - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/ticket.service.ts
   - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/user.service.ts
   - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/users.service.ts
-  - yarn
-  - yarn build
+  - npm install
+  - npm run build
 
 - name: Upload to S3
   image: plugins/s3
