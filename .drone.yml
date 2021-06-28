@@ -1,0 +1,82 @@
+kind: pipeline
+type: docker
+name: build
+
+platform:
+  arch: amd64
+  os: linux
+
+steps:
+- name: publish to Dockerhub image
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    repo: thomaslacaze/itm-frontend
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+  when:
+    event:
+    - push
+    - tag
+    branch:
+    - master
+    - main
+
+- name: publish readme to Dockerhub
+  image: thomaslacaze/dockerhub-description:2.4.1
+  pull: always
+  settings:
+    repository: thomaslacaze/itm-frontend
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    readme: /drone/src/README.md
+  when:
+    branch:
+    - master
+    - main
+
+---
+kind: pipeline
+type: docker
+name: deploy
+
+steps:
+- name: build
+  image: node
+  volumes:
+  - name: cache
+    path: /drone/src/dist
+  commands:
+  - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/auth.service.ts
+  - cat /drone/src/src/app/services/auth.service.ts
+  - yarn
+  - yarn build
+
+- name: Upload to S3
+  image: plugins/s3
+  volumes:
+  - name: cache
+    path: /drone/src/dist
+  settings:
+    bucket: itm-frontend
+    access_key: 
+      from_secret: aws_access_key
+    secret_key: 
+      from_secret: aws_secret_key
+    source: /drone/src/dist/itm-frontend/**/*
+    region: eu-west-1
+    target: /production
+
+trigger:
+  event:
+  - promote
+  target:
+  - production
+
+volumes:
+- name: cache
+  temp: {}

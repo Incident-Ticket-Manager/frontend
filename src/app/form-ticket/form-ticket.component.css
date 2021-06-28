@@ -1,0 +1,17 @@
+.modal-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  width: 40%;
+  outline: none;
+}
+
+.ticket-modal {
+  height: 100%;
+}
+
+textarea {
+  resize: none;
+}

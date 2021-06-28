@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Remove developer from project {{ data.project.name | titlecase }}</h1>
+<div mat-dialog-content class="add-user-project-modal">
+  <form [formGroup]="deleteUserForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>User to remove</mat-label>
+      <mat-select formControlName="user">
+        <mat-option *ngFor="let user of data.project.users" [value]="user.username">
+          {{ user.username | titlecase }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div mat-dialog-actions class="modal-bottom">
+      <button mat-stroked-button color="primary" (click)="onCancelClick()">Cancel</button>
+      <button mat-raised-button cdkFocusInitial color="primary" type="submit">Remove</button>
+    </div>
+  </form>
+</div>

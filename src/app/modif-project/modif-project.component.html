@@ -1,0 +1,19 @@
+<h1>Modify Project</h1>
+<div class="d-flex flex-column">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Project name ...</mat-label>
+      <input matInput placeholder="Project name..." formControlName="projectname">
+
+      <mat-error
+        *ngIf="projectname.invalid && (projectname.dirty || projectname.touched) && projectname.errors.required">
+        Project name is required
+      </mat-error>
+      <mat-error
+        *ngIf="projectname.invalid && (projectname.dirty || projectname.touched) && projectname.errors.minlength">
+        Project name is required
+      </mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">Modify</button>
+  </form>
+</div>

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete</h1>
+<div mat-dialog-content>
+  <p>Are you sure that you want to delete{{ data.name | titlecase }} {{ data.itemModel }} ?</p>
+</div>
+<div mat-dialog-actions class="modal-bottom">
+  <button mat-button (click)="onCancelClick()">Close</button>
+  <button mat-raised-button cdkFocusInitial color="primary" (click)="onDeleteClick()">Delete</button>
+</div>

@@ -1,0 +1,47 @@
+<mat-card>
+    <h2>Users</h2>
+    <mat-table [dataSource]="users">
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+      </ng-container>
+  
+      <!-- role Column -->
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef> Admin </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.admin}} </mat-cell>
+      </ng-container>
+  
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="mail">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}}  </mat-cell>
+      </ng-container>
+  
+      <!-- Actions Column -->
+  
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <ng-container *ngIf="this.profile.username == element.admin || profile.admin">
+          <button (click)="handleClickModifUser(element)" mat-icon-button>
+            <mat-icon>create</mat-icon>
+          </button>
+          <button (click)="handleClickDeleteUser(element)" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="handleClickCreateUser()">Create</button>
+    </mat-card-actions>
+  </mat-card>
+  

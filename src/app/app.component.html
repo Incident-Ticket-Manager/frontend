@@ -1,0 +1,15 @@
+<mat-toolbar color="primary"><span style="color: white">Incident Ticket Manager</span>
+
+  <span style="flex: 1 1 auto;"></span>
+
+  <ng-container *ngIf="profile === null">
+    <button mat-button routerLink="register">Register</button>
+    <button mat-button routerLink="login">Login</button>
+  </ng-container>
+  <ng-container  *ngIf="profile !== null">
+    <button mat-button (click)="logout()">Logout</button>
+  </ng-container>
+</mat-toolbar>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
