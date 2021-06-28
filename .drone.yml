@@ -74,13 +74,11 @@ steps:
       from_secret: aws_secret_key
     source: /drone/src/dist/itm-frontend/**/*
     region: eu-west-1
-    target: /production
+    target: /${CI_BUILD_TARGET}
 
 trigger:
   event:
   - promote
-  target:
-  - production
 
 volumes:
 - name: cache
