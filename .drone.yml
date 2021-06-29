@@ -51,7 +51,7 @@ steps:
   image: node
   volumes:
   - name: cache
-    path: /drone/src/dist
+    path: /drone/src/dist/itm-frontend
   commands:
   - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/auth.service.ts
   - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/client.service.ts
@@ -66,16 +66,16 @@ steps:
   image: plugins/s3
   volumes:
   - name: cache
-    path: /drone/src/dist
+    path: /drone/src/${CI_BUILD_TARGET}
   settings:
     bucket: itm-frontend
     access_key: 
       from_secret: aws_access_key
     secret_key: 
       from_secret: aws_secret_key
-    source: dist/itm-frontend/*
+    source: ${CI_BUILD_TARGET}/*
     region: eu-west-1
-    target: /${CI_BUILD_TARGET}
+    target: /public
 
 trigger:
   event:
