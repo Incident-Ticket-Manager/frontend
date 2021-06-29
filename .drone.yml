@@ -72,6 +72,7 @@ steps:
     secret_key: 
       from_secret: aws_secret_key
     source: /drone/src/dist/itm-frontend/**/*
+    strip_prefix: public/
     region: eu-west-1
     target: /${CI_BUILD_TARGET}
 
