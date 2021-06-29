@@ -41,12 +41,14 @@ steps:
     - master
     - main
 
-- name: send
-  image: plugins/webhook
+- name: Discord notification
+  image: appleboy/drone-discord
   settings:
-    urls:
-      from_secret: discord_webhook
-
+    webhook_id:
+      from_secret: discord_webhook_id
+    webhook_token:
+      from_secret: discord_webhook_token
+      
 ---
 kind: pipeline
 type: docker
@@ -83,11 +85,13 @@ steps:
     region: eu-west-1
     target: /public
 
-- name: send
-  image: plugins/webhook
+- name: Discord notification
+  image: appleboy/drone-discord
   settings:
-    urls:
-      from_secret: discord_webhook
+    webhook_id:
+      from_secret: discord_webhook_id
+    webhook_token:
+      from_secret: discord_webhook_token
 
 trigger:
   event:
