@@ -35,6 +35,8 @@ steps:
       from_secret: docker_password
     readme: /drone/src/README.md
   when:
+    event:
+    - push
     branch:
     - master
     - main
