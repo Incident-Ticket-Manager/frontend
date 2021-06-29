@@ -71,8 +71,7 @@ steps:
       from_secret: aws_access_key
     secret_key: 
       from_secret: aws_secret_key
-    source: /drone/src/dist/itm-frontend/**/*
-    strip_prefix: public/
+    source: dist/itm-frontend/*
     region: eu-west-1
     target: /${CI_BUILD_TARGET}
 
