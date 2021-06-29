@@ -74,6 +74,7 @@ steps:
   - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/ticket.service.ts
   - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/user.service.ts
   - sed -e "s|https://api-itm.herokuapp.com|$BACKEND_URL|" /drone/src/src/app/services/users.service.ts
+  - sed -i "s|<base href=\"/\">|<base href=\"/public/$CI_BUILD_TARGET\">|" src/index.html
   - npm install
   - npm run build
 
@@ -101,9 +102,9 @@ steps:
       from_secret: discord_webhook_token
     message: >
       {{#success build.status}}
-        Promote {{build.number}} succeeded. Good job.
+        Promote {{repo.name}} succeeded. Good job.
       {{else}}
-        Promote {{build.number}} failed. Fix me please.
+        Promote {{repo.name}} failed. Fix me please.
       {{/success}}
 
 trigger:
