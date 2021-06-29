@@ -41,6 +41,12 @@ steps:
     - master
     - main
 
+- name: send
+  image: plugins/webhook
+  settings:
+    urls:
+      from_secret: discord_webhook
+
 ---
 kind: pipeline
 type: docker
@@ -76,6 +82,12 @@ steps:
     source: ${CI_BUILD_TARGET}/*
     region: eu-west-1
     target: /public
+
+- name: send
+  image: plugins/webhook
+  settings:
+    urls:
+      from_secret: discord_webhook
 
 trigger:
   event:
