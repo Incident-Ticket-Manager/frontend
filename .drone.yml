@@ -74,7 +74,7 @@ steps:
   - sed -e "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/ticket.service.ts
   - sed -e "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/user.service.ts
   - sed -e "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/users.service.ts
-  - sed -i "s|<base href=\"/\">|<base href=\"/public/${CI_BUILD_TARGET}\">|" src/index.html
+  - sed -i "s|<base href=\"/\">|<base href=\"/public/${CI_BUILD_TARGET}/\">|" src/index.html
   - npm install
   - npm run build
 
