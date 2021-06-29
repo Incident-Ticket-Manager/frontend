@@ -48,6 +48,12 @@ steps:
       from_secret: discord_webhook_id
     webhook_token:
       from_secret: discord_webhook_token
++   message: >
++     {{#success build.status}}
++       Build {{build.number}} succeeded. Good job.
++     {{else}}
++       Build {{build.number}} failed. Fix me please.
++     {{/success}}
   when:
     event:
     - push
@@ -99,6 +105,12 @@ steps:
       from_secret: discord_webhook_id
     webhook_token:
       from_secret: discord_webhook_token
++   message: >
++     {{#success build.status}}
++       Promote {{build.number}} succeeded. Good job.
++     {{else}}
++       Promote {{build.number}} failed. Fix me please.
++     {{/success}}
 
 trigger:
   event:
