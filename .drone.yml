@@ -68,12 +68,12 @@ steps:
   - name: cache
     path: /drone/src/dist/itm-frontend
   commands:
-  - sed -e "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/auth.service.ts
-  - sed -e "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/client.service.ts
-  - sed -e "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/project.service.ts
-  - sed -e "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/ticket.service.ts
-  - sed -e "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/user.service.ts
-  - sed -e "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/users.service.ts
+  - sed -i "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/auth.service.ts
+  - sed -i "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/client.service.ts
+  - sed -i "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/project.service.ts
+  - sed -i "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/ticket.service.ts
+  - sed -i "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/user.service.ts
+  - sed -i "s|https://api-itm.herokuapp.com|${BACKEND_URL}|" /drone/src/src/app/services/users.service.ts
   - sed -i "s|<base href=\"/\">|<base href=\"/public/${CI_BUILD_TARGET}/\">|" src/index.html
   - npm install
   - npm run build
